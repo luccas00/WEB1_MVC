@@ -1,0 +1,12 @@
+﻿@model LuccasCorp.Models.VerifyPhoneViewModel
+
+@{
+    ViewBag.Title = "Telefone Confirmado";
+}
+
+<h2>@ViewBag.Title</h2>
+<h3>Seu número de telefone foi confirmado com sucesso!</h3>
+
+<p>Agora você pode realizar o login e acessar sua conta normalmente.</p>
+
+<a href="@Url.Action("Login", "Account")" class="btn btn-primary">Ir para Login</a>
