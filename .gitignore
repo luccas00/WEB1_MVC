@@ -1,0 +1,8 @@
+# Ignorar todos os arquivos .config
+*.config
+/.vs/LuccasCorp
+/App_Data
+/bin
+/obj
+/Properties/PublishProfiles
+/Migrations
