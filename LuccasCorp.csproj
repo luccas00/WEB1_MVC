@@ -343,6 +343,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\logo-decsi.png" />
     <Content Include="MyScripts\formatarMatricula.js" />
     <Content Include="MyScripts\formatarTelefone.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />

@@ -35,10 +35,27 @@
         @RenderBody()
     </div>
 
+
+    @*<footer class="footer">
+        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 0 20px; box-sizing: border-box;">
+            <p style="margin: 0; padding-left: 100px">&copy; @DateTime.Now.Year - Luccas Corp ASP.NET</p>
+            <div style="text-align: center; flex: 1;">
+                <img src="~/Images/logo-decsi.png" alt="Departamento de Computação e Sistemas" style="width: 15%;" />
+            </div>
+            <p style="margin: 0; padding-right: 100px">Sistemas Web 1 CSI606</p>
+        </div>
+    </footer>*@
+
     <footer class="footer">
-        <hr />
-        <p>&copy; @DateTime.Now.Year - Luccas Corp ASP.NET</p>
+        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 0 20px; box-sizing: border-box;">
+            <p style="margin: 0; padding-left: 100px">&copy; @DateTime.Now.Year - Luccas Corp ASP.NET</p>
+            <div style="text-align: center;">
+                <img src="~/Images/logo-decsi.png" alt="Departamento de Computação e Sistemas" style="width: 15%; " />
+            </div>
+            <p style="margin: 0; padding-right: 100px">Sistemas Web 1 CSI606</p>
+        </div>
     </footer>
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

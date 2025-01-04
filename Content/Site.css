@@ -3,8 +3,8 @@
     margin-top: 15px;
     padding-left: 15px;
     padding-right: 15px;
-    min-height: 93.5%; /* Para garantir que a área de conteúdo ocupe toda a altura disponível */
-    padding-bottom: 50px; /* Espaço suficiente para o rodapé */
+    min-height: 100%; /* Para garantir que a área de conteúdo ocupe toda a altura disponível */
+    padding-bottom: 100px; /* Espaço suficiente para o rodapé */
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -27,7 +27,7 @@ textarea {
 
 /* Rodapé fixo na parte inferior da página */
 html, body {
-    height: 93.5%;
+    height: 100%;
     margin: 0;
 }
 
@@ -36,10 +36,10 @@ html, body {
     bottom: 0;
     width: 100%;
     text-align: center;
-    padding: 10px 0;
-    background-color: #f8f9fa; /* Cor de fundo do rodapé */
-    border-top: 1px solid #ddd; /* Borda superior do rodapé */
+    background-color: #f8f9fa;  Cor de fundo do rodapé 
+    border-top: 1px solid #ddd;  Borda superior do rodapé 
 }
+
 
 .custom-textarea {
     height: 200px;
