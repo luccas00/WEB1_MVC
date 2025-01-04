@@ -26,6 +26,13 @@ namespace LuccasCorp.Models
         public string Message { get; set; }
 
         public DateTime DateSent { get; set; } = DateTime.Now; // Data e hora de envio
+
+        public string Sentimento { get; set; }
+        public double Positivo { get; set; }
+        public double Negativo { get; set; }
+        public double Neutro { get; set; }
+        public bool Insulto { get; set; }
+
     }
 
 }

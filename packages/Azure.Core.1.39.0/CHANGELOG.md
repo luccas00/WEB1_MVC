@@ -1,5 +1,15 @@
 # Release History
 
+## 1.39.0 (2024-04-18)
+
+### Features Added
+
+- Add `Operation.Rehydrate` and `Operation.Rehydrate<T>` static methods to rehydrate a long-running operation.
+
+### Other Changes
+
+- `RequestFailedException` will not include the response content or headers in the message when the `IsError` property of the response is `false`.
+
 ## 1.38.0 (2024-02-26)
 
 ### Features Added

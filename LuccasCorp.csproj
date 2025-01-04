@@ -46,8 +46,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Azure.Core, Version=1.38.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
-      <HintPath>packages\Azure.Core.1.38.0\lib\net472\Azure.Core.dll</HintPath>
+    <Reference Include="Azure.AI.Language.Conversations, Version=1.0.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>packages\Azure.AI.Language.Conversations.1.0.0\lib\netstandard2.0\Azure.AI.Language.Conversations.dll</HintPath>
+    </Reference>
+    <Reference Include="Azure.AI.OpenAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>packages\Azure.AI.OpenAI.1.0.0-beta.17\lib\netstandard2.0\Azure.AI.OpenAI.dll</HintPath>
+    </Reference>
+    <Reference Include="Azure.AI.TextAnalytics, Version=5.3.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>packages\Azure.AI.TextAnalytics.5.3.0\lib\netstandard2.0\Azure.AI.TextAnalytics.dll</HintPath>
+    </Reference>
+    <Reference Include="Azure.Core, Version=1.39.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>packages\Azure.Core.1.39.0\lib\net472\Azure.Core.dll</HintPath>
     </Reference>
     <Reference Include="Azure.Identity, Version=1.11.4.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
       <HintPath>packages\Azure.Identity.1.11.4\lib\netstandard2.0\Azure.Identity.dll</HintPath>
@@ -300,9 +309,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202501030146043_MyMigration.cs" />
-    <Compile Include="Migrations\202501030146043_MyMigration.Designer.cs">
-      <DependentUpon>202501030146043_MyMigration.cs</DependentUpon>
+    <Compile Include="Migrations\202501040313437_MyMigration.cs" />
+    <Compile Include="Migrations\202501040313437_MyMigration.Designer.cs">
+      <DependentUpon>202501040313437_MyMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -394,6 +403,7 @@
     <Content Include="Views\Home\Learn.cshtml" />
     <Content Include="Views\ContactMessages\Create.cshtml" />
     <Content Include="Views\ContactMessages\Index.cshtml" />
+    <Content Include="Views\ContactMessages\ConteudoImproprio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -426,8 +436,8 @@
     <Content Include="Scripts\jquery-3.7.0.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202501030146043_MyMigration.resx">
-      <DependentUpon>202501030146043_MyMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202501040313437_MyMigration.resx">
+      <DependentUpon>202501040313437_MyMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
