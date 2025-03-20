@@ -1,0 +1,21 @@
+﻿################################################################################
+# Este arquivo .gitignore foi criado automaticamente pelo Microsoft(R) Visual Studio.
+################################################################################
+
+/obj/Release/CSAutoParameterize/original/Web.config
+/obj/Release/CSAutoParameterize/original/Views/Web.config
+/obj/Release/CSAutoParameterize/transformed/Web.config
+/obj/Release/CSAutoParameterize/transformed/Views/Web.config
+/Web.config
+/Web.Debug.config
+/Web.Release.config
+
+*.env
+*.key
+*.secret
+/.vs/LuccasCorpVX
+/App_Data
+/bin
+/obj
+/packages
+/Properties
