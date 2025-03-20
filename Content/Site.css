@@ -1,0 +1,52 @@
+﻿/* Set padding to keep content from hitting the edges */
+.body-content {
+    margin-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    min-height: 100%; /* Para garantir que a área de conteúdo ocupe toda a altura disponível */
+    padding-bottom: 100px; /* Espaço suficiente para o rodapé */
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 400px;
+}
+
+.mytextarea {
+    max-width: 600px;
+}
+
+/* Rodapé fixo na parte inferior da página */
+html, body {
+    height: 91%;
+    margin: 0;
+}
+
+.footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-color: #f8f9fa;
+    Cor de fundo do rodapé border-top: 1px solid #ddd;
+    Borda superior do rodapé
+}
+
+
+.custom-textarea {
+    height: 200px;
+    resize: vertical; /* Permite redimensionar verticalmente */
+}
+
+.bg-custom-blue {
+    background-color: #708090; /* Tom de azul escuro */
+}

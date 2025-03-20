@@ -1,0 +1,72 @@
+﻿@using LuccasCorpVX.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Logon";
+}
+
+<main aria-labelledby="title">
+    <h2 id="title">@ViewBag.Title</h2>
+    <div class="row">
+        <!-- Coluna do Formulário de Login -->
+        <div class="col-12 col-md-6 bg-light p-3">
+            <section id="loginForm">
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <h4>Use uma conta local para fazer o logon.</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="row mb-3">
+                        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 col-form-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control rounded-pill shadow-sm" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 col-form-label" })
+                        <div class="col-md-10">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control rounded-pill shadow-sm" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="offset-md-2 col-md-10">
+                            <div class="checkbox">
+                                @Html.CheckBoxFor(m => m.RememberMe)
+                                @Html.LabelFor(m => m.RememberMe)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="offset-md-2 col-md-10">
+                            <input type="submit" value="Logon" class="btn btn-outline-dark rounded-pill shadow-sm" />
+                        </div>
+                    </div>
+
+                    <p>
+                        @Html.ActionLink("Registre-se como um novo usuário", "Register")
+                    </p>
+
+                    @* Habilite quando a confirmação da conta estiver ativada para a funcionalidade de redefinição de senha*@
+                    <p>
+                        @Html.ActionLink("Esqueceu sua senha?", "ForgotPassword")
+                    </p>
+                }
+            </section>
+        </div>
+
+        <!-- Coluna da Imagem -->
+        <div class="col-12 col-md-6 d-flex justify-content-center align-items-center bg-custom-blue p-3">
+            <img src="~/Images/logo_ufop_horizontal.png" alt="Imagem de login" class="img-fluid rounded" style="max-width: 100%; height: auto;" />
+        </div>
+    </div>
+</main>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

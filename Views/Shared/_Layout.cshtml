@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Luccas Corp ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+        <div class="container">
+            @Html.ActionLink("Luccas Corp", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Alternar a navegação" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li>@Html.ActionLink("Página Inicial", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Learn", "Learn", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Sobre", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Contato", "Create", "ContactMessages", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li><a href="https://ufop.br/" class="nav-link" target="_blank" rel="noopener noreferrer">UFOP</a></li>
+                    <li><a href="https://moodlepresencial.ufop.br/login/index.php" class="nav-link" target="_blank" rel="noopener noreferrer">Moodle UFOP</a></li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </nav>
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+
+    @*<footer class="footer">
+            <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 0 20px; box-sizing: border-box;">
+                <p style="margin: 0; padding-left: 100px">&copy; @DateTime.Now.Year - Luccas Corp ASP.NET</p>
+                <div style="text-align: center; flex: 1;">
+                    <img src="~/Images/logo-decsi.png" alt="Departamento de Computação e Sistemas" style="width: 15%;" />
+                </div>
+                <p style="margin: 0; padding-right: 100px">Sistemas Web 1 CSI606</p>
+            </div>
+        </footer>*@
+
+    <footer class="footer">
+        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 0 20px; box-sizing: border-box;">
+            <p style="margin: 0; padding-left: 100px">&copy; @DateTime.Now.Year - Luccas Corp ASP.NET</p>
+            <div style="text-align: center;">
+                <img src="~/Images/logo-decsi.png" alt="Departamento de Computação e Sistemas" style="width: 15%; " />
+            </div>
+            <p style="margin: 0; padding-right: 100px">Sistemas Web 1 CSI606</p>
+        </div>
+    </footer>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/bootstrap.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

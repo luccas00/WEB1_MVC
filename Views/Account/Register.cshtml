@@ -1,0 +1,104 @@
+﻿@model LuccasCorpVX.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Registre-se";
+}
+
+<main class="container mt-5" aria-labelledby="title">
+    <div class="row">
+
+        <!-- Coluna do Formulário -->
+        <div class="col-md-6 bg-light p-3">
+            <h2 id="title" class="mb-4">@ViewBag.Title</h2>
+
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <h4>Criar uma nova conta.</h4>
+                <hr />
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+
+                <div class="form-group row mb-3">
+                    @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 col-form-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control rounded-pill shadow-sm" })
+                    </div>
+                </div>
+
+                <div class="form-group row mb-3">
+                    @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 col-form-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control rounded-pill shadow-sm" })
+                    </div>
+                </div>
+
+                <div class="form-group row mb-3">
+                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 col-form-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Email, new
+                        {
+                            @class = "form-control rounded-pill shadow-sm",
+                            placeholder = "Ex: exemplo@aluno.ufop.edu.br",
+                            onchange = "validarEmail(this)",
+                            oninput = "validarEmail(this)"  // Adicionando oninput para checar em tempo real
+                        })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row mb-3">
+                    @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 col-form-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control rounded-pill shadow-sm", placeholder = "Ex: 11 91234-5678", oninput = "formatarTelefone(this)" })
+                        @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row mb-3">
+                    @Html.LabelFor(m => m.NumeroMatricula, new { @class = "col-md-2 col-form-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.NumeroMatricula, new { @class = "form-control rounded-pill shadow-sm", id = "matricula", type = "text", maxlength = "10", oninput = "formatarMatricula(this)", placeholder = "Apenas Números" })
+                        @Html.ValidationMessageFor(m => m.NumeroMatricula, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="form-group row mb-3">
+                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 col-form-label" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control rounded-pill shadow-sm" })
+                    </div>
+                </div>
+
+                <div class="form-group row mb-3">
+                    @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 col-form-label" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control rounded-pill shadow-sm" })
+                    </div>
+                    <div class="col-md-10">
+                        <span class="text-muted">Mínimo de 6 caracteres, com letras e números</span>
+                    </div>
+                </div>
+
+                <div class="form-group row mb-4">
+                    <div class="col-md-10 text-center">
+                        <input type="submit" value="Registrar" class="btn btn-primary rounded-pill shadow-sm px-4 py-2" />
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Coluna da Imagem -->
+        <div class="col-md-6 d-flex justify-content-center align-items-center bg-custom-blue p-3">
+            <img src="~/Images/logo_ufop_horizontal.png" alt="Imagem de registro" class="img-fluid rounded" style="max-width: 100%; height: auto;" />
+        </div>
+
+    </div>
+</main>
+
+@section Scripts {
+    <script src="~/MyScripts/formatarMatricula.js" type="text/javascript"></script>
+    <script src="~/MyScripts/formatarTelefone.js" type="text/javascript"></script>
+    <script src="~/MyScripts/verificarEmailUFOP.js" type="text/javascript"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+}
