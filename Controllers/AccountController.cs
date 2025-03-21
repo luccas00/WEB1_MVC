@@ -177,6 +177,12 @@ namespace LuccasCorpVX.Controllers
                 }
 
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, NumeroMatricula = model.NumeroMatricula, FirstName = model.FirstName, LastName = model.LastName, PhoneNumber = "+55 " + model.PhoneNumber };
+
+                if (model.Email.Contains("@aluno.ufop.edu.br"))
+                    user.Tipo = "Aluno";
+                else
+                    user.Tipo = "Professor";
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -217,8 +223,50 @@ namespace LuccasCorpVX.Controllers
             {
                 return View("Error");
             }
+
             var result = await UserManager.ConfirmEmailAsync(userId, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+            //return View(result.Succeeded ? "ConfirmEmail" : "Error");
+
+            if (result.Succeeded)
+            {
+                // Obtém o usuário do banco de dados
+                var user = await UserManager.FindByIdAsync(userId);
+                if (user != null)
+                {
+                    using (var context = new ApplicationDbContext()) // Substitua pelo seu contexto real
+                    {
+                        if (user.Tipo.Equals("Aluno"))
+                        {
+                            // Criar um registro na tabela Alunos
+                            var aluno = new Aluno
+                            {
+                                Nome = user.UserName,
+                                Email = user.Email,
+                                UserId = user.Id
+                            };
+                            context.Alunos.Add(aluno);
+                        }
+                        else
+                        {
+                            // Criar um registro na tabela Professores
+                            var professor = new Professor
+                            {
+                                Nome = user.UserName,
+                                Email = user.Email,
+                                UserId = user.Id
+                            };
+                            context.Professores.Add(professor);
+                        }
+
+                        await context.SaveChangesAsync(); // Salvar no banco de dados
+                    }
+                }
+
+                return View("ConfirmEmail"); // Exibir a página de sucesso
+            }
+
+            return View("Error");
+
         }
 
         //
@@ -528,10 +576,8 @@ namespace LuccasCorpVX.Controllers
         private async Task<string> SendEmailConfirmationTokenAsync(string userID, string subject)
         {
             string code = await UserManager.GenerateEmailConfirmationTokenAsync(userID);
-            var callbackUrl = Url.Action("ConfirmEmail", "Account",
-               new { userId = userID, code = code }, protocol: Request.Url.Scheme);
-            await UserManager.SendEmailAsync(userID, subject,
-               "Confirme sua conta clicando <a href=\"" + callbackUrl + "\">aqui</a>");
+            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = userID, code = code }, protocol: Request.Url.Scheme);
+            await UserManager.SendEmailAsync(userID, subject, "Confirme sua conta clicando <a href=\"" + callbackUrl + "\">aqui</a>");
 
             return callbackUrl;
         }

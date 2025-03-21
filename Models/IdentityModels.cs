@@ -1,6 +1,7 @@
 ﻿using LuccasCorpVX.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Data.Entity;
 using System.Globalization;
 using System.Security.Claims;
@@ -14,6 +15,9 @@ namespace LuccasCorpVX.Models
         public string NumeroMatricula { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string Tipo { get; set; }
+
+        public DateTime CreatedOn { get; set; } = DateTime.Now; // Data e hora de criação
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -43,6 +47,13 @@ namespace LuccasCorpVX.Models
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+
+        public async Task<string> GetTipoAsync(string userId)
+        {
+            // Supondo que você tenha uma tabela associada ou um campo na tabela de usuários
+            var user = await this.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            return user?.Tipo; // Retorna o tipo do Usuario
         }
 
         public async Task<string> GetNumeroMatriculaAsync(string userId)

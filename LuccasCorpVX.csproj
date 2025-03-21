@@ -338,11 +338,15 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Images\Web I MVC - LuccasCorpVX.pdf" />
+    <Content Include="DBDiagram.md" />
     <None Include="Properties\PublishProfiles\LuccasCorpV2 - Web Deploy.pubxml" />
     <Content Include="ILLink\ILLink.Descriptors.LibraryBuild.xml" />
     <Content Include="Images\logo-decsi.png" />
     <Content Include="Images\logo_ufop.png" />
     <Content Include="Images\logo_ufop_horizontal.png" />
+    <Content Include="Images\Web I MVC - LuccasCorpVX.png" />
+    <Content Include="Images\Web I MVC - LuccasCorpVX.svg" />
     <Content Include="MyScripts\formatarMatricula.js" />
     <Content Include="MyScripts\formatarTelefone.js" />
     <Content Include="MyScripts\verificarEmailUFOP.js" />
