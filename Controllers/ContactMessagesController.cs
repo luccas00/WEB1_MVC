@@ -113,7 +113,7 @@ namespace LuccasCorpVX.Controllers
                         contactMessage.Neutro = aux.Neutro;
                     }
 
-                    contactMessage.DateSent = DateTime.Now;
+                    contactMessage.CreatedOn = DateTime.Now;
                     contactMessage.Insulto = true;
                     db.ContactMessages.Add(contactMessage);
                     db.SaveChanges();
@@ -134,7 +134,7 @@ namespace LuccasCorpVX.Controllers
                     }
                 }
                 
-                contactMessage.DateSent = DateTime.Now;
+                contactMessage.CreatedOn = DateTime.Now;
                 contactMessage.Insulto = false;
                 db.ContactMessages.Add(contactMessage);
                 db.SaveChanges();

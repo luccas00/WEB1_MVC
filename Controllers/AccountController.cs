@@ -200,7 +200,7 @@ namespace LuccasCorpVX.Controllers
                     // Uncomment to debug locally 
                     // TempData["ViewBagLink"] = callbackUrl;
 
-                    ViewBag.Message = "Verifique seu e-mail e confirme sua conta. Você deve ser confirmado antes de poder fazer login.<br /><br />Para reenviar o email, basta tentar fazer login novamente.";
+                    ViewBag.Message = "Verifique seu e-mail e confirme sua conta. Você deve ser confirmado antes de poder fazer login. Para reenviar o email, basta tentar fazer login novamente.";
 
                     return View("Info");
 
@@ -238,22 +238,28 @@ namespace LuccasCorpVX.Controllers
                         if (user.Tipo.Equals("Aluno"))
                         {
                             // Criar um registro na tabela Alunos
-                            var aluno = new Aluno
+                            var aluno = new Alunos
                             {
-                                Nome = user.UserName,
+                                FirstName = user.FirstName,
+                                LastName = user.LastName,
                                 Email = user.Email,
-                                UserId = user.Id
+                                NumeroMatricula = user.NumeroMatricula,
+                                Id = user.Id,
+                                Ativo = true
                             };
                             context.Alunos.Add(aluno);
                         }
                         else
                         {
                             // Criar um registro na tabela Professores
-                            var professor = new Professor
+                            var professor = new Professores
                             {
-                                Nome = user.UserName,
+                                FirstName = user.FirstName,
+                                LastName = user.LastName,
                                 Email = user.Email,
-                                UserId = user.Id
+                                Id = user.Id,
+                                Ativo = true,
+                                Campus = "ICEA"
                             };
                             context.Professores.Add(professor);
                         }

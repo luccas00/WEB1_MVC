@@ -16,7 +16,6 @@ namespace LuccasCorpVX.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Tipo { get; set; }
-
         public DateTime CreatedOn { get; set; } = DateTime.Now; // Data e hora de criação
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
@@ -36,6 +35,9 @@ namespace LuccasCorpVX.Models
         }
 
         public DbSet<ContactMessage> ContactMessages { get; set; } // Adicionando o DbSet para as mensagens de contato
+        public DbSet<Comentario> Comentarios { get; set; } // Adicionando o DbSet para os Comentarios
+        public DbSet<Alunos> Alunos { get; set; } // Adicionando o DbSet para os Comentarios
+        public DbSet<Professores> Professores { get; set; } // Adicionando o DbSet para os Comentarios
 
         //static ApplicationDbContext()
         //{
@@ -47,6 +49,30 @@ namespace LuccasCorpVX.Models
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+
+        public async Task<string> GetDepartamentoAsync(string userId)
+        {
+            // Supondo que você tenha uma tabela associada ou um campo na tabela de usuários
+            var user = await this.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            var professor = await this.Professores.FirstOrDefaultAsync(p => p.Email == user.Email);
+            return professor?.Departamento; // Retorna o departamento do Professor
+        }
+
+        public async Task<string> GetCampusAsync(string userId)
+        {
+            // Supondo que você tenha uma tabela associada ou um campo na tabela de usuários
+            var user = await this.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            var professor = await this.Professores.FirstOrDefaultAsync(p => p.Email == user.Email);
+            return professor?.Campus; // Retorna o campus do Professor
+        }
+
+        public async Task<byte[]> GetFotoAsync(string userId)
+        {
+            // Supondo que você tenha uma tabela associada ou um campo na tabela de usuários
+            var user = await this.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            var professor = await this.Professores.FirstOrDefaultAsync(p => p.Email == user.Email);
+            return professor?.Foto; // Retorna a foto do Professor
         }
 
         public async Task<string> GetTipoAsync(string userId)
@@ -106,5 +132,7 @@ namespace LuccasCorpVX.Models
             }
 
         }
+
+        public System.Data.Entity.DbSet<LuccasCorpVX.Models.Disciplinas> Disciplinas { get; set; }
     }
 }

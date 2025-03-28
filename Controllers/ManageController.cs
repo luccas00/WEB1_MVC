@@ -1,8 +1,13 @@
 ﻿using LuccasCorpVX.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Owin.Security;
+using System;
+using System.Data.Entity;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -12,8 +17,13 @@ namespace LuccasCorpVX.Controllers
     [Authorize]
     public class ManageController : Controller
     {
+        private ApplicationSignInManager _signInManager;
+        private ApplicationUserManager _userManager;
+        private readonly ApplicationDbContext _context;
+
         public ManageController()
         {
+            _context = new ApplicationDbContext();
         }
 
         public ManageController(ApplicationUserManager userManager)
@@ -21,7 +31,6 @@ namespace LuccasCorpVX.Controllers
             UserManager = userManager;
         }
 
-        private ApplicationUserManager _userManager;
         public ApplicationUserManager UserManager
         {
             get
@@ -34,31 +43,120 @@ namespace LuccasCorpVX.Controllers
             }
         }
 
-        //
-        // GET: /Account/Index
-        [HttpGet]
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
+            var userId = User.Identity.GetUserId();
+            var fullName = await ApplicationDbContext.GetFullNameAsync(userId);
+
+            ViewBag.FullName = fullName;
+            ViewBag.Tipo = await _context.GetTipoAsync(userId); // Aqui está o uso do método
+
             ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.SetTwoFactorSuccess ? "Your two factor provider has been set."
-                : message == ManageMessageId.Error ? "An error has occurred."
-                : message == ManageMessageId.AddPhoneSuccess ? "The phone number was added."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                message == ManageMessageId.ChangePasswordSuccess ? "Sua senha foi alterada."
+                : message == ManageMessageId.SetPasswordSuccess ? "Sua senha foi definida."
+                : message == ManageMessageId.SetTwoFactorSuccess ? "Seu provedor de autenticação de dois fatores foi definido."
+                : message == ManageMessageId.Error ? "Ocorreu um erro."
+                : message == ManageMessageId.AddPhoneSuccess ? "Seu número de telefone foi adicionado."
+                : message == ManageMessageId.RemovePhoneSuccess ? "Seu número de telefone foi removido."
                 : "";
 
-            var userId = User.Identity.GetUserId();
+            var numeroMatricula = await _context.GetNumeroMatriculaAsync(userId); // Aqui está o uso do método
+            var firstName = await _context.GetFirstNameAsync(userId); // Aqui está o uso do método
+            var lastName = await _context.GetLastNameAsync(userId); // Aqui está o uso do método
+
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
+                NumeroMatricula = numeroMatricula,
+                FirstName = firstName,
+                LastName = lastName,
+                Email = await UserManager.GetEmailAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
             return View(model);
         }
+
+        public async Task<ActionResult> IndexProfessor(ManageMessageId? message)
+        {
+            var userId = User.Identity.GetUserId();
+            var fullName = await ApplicationDbContext.GetFullNameAsync(userId);
+
+            ViewBag.FullName = fullName;
+            ViewBag.Tipo = await _context.GetTipoAsync(userId); // Aqui está o uso do método
+
+            ViewBag.StatusMessage =
+                message == ManageMessageId.ChangePasswordSuccess ? "Sua senha foi alterada."
+                : message == ManageMessageId.SetPasswordSuccess ? "Sua senha foi definida."
+                : message == ManageMessageId.SetTwoFactorSuccess ? "Seu provedor de autenticação de dois fatores foi definido."
+                : message == ManageMessageId.Error ? "Ocorreu um erro."
+                : message == ManageMessageId.AddPhoneSuccess ? "Seu número de telefone foi adicionado."
+                : message == ManageMessageId.RemovePhoneSuccess ? "Seu número de telefone foi removido."
+                : "";
+
+            //var numeroMatricula = await _context.GetNumeroMatriculaAsync(userId); // Aqui está o uso do método
+            var firstName = await _context.GetFirstNameAsync(userId); // Aqui está o uso do método
+            var lastName = await _context.GetLastNameAsync(userId); // Aqui está o uso do método
+            var campus = await _context.GetCampusAsync(userId); // Aqui está o uso do método
+            var departamento = await _context.GetDepartamentoAsync(userId); // Aqui está o uso do método
+            var foto = await _context.GetFotoAsync(userId); // Aqui está o uso do método
+
+            var model = new IndexProfessorViewModel
+            {
+                HasPassword = HasPassword(),
+                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
+                FirstName = firstName,
+                LastName = lastName,
+                Email = await UserManager.GetEmailAsync(userId),
+                Foto = foto,
+                Campus = campus,
+                Departamento = departamento,
+                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
+                Logins = await UserManager.GetLoginsAsync(userId),
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                Id = userId
+            };
+            return View(model);
+        }
+
+        public ActionResult ExibirFoto(string id)
+        {
+            var professor = _context.Professores.Find(id);
+            if (professor != null && professor.Foto != null)
+            {
+                return File(professor.Foto, "image/jpeg"); // ou "image/png" dependendo do formato da imagem
+            }
+            return HttpNotFound();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditProfessor(IndexProfessorViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var professor = _context.Professores.Find(model.Id);
+                if (professor != null)
+                {
+                    professor.Departamento = model.Departamento;
+                    _context.SaveChanges();
+
+                    // Mensagem de Sucesso
+                    TempData["SaveSuccess"] = "Alterações salvas com sucesso!";
+                    return RedirectToAction("IndexProfessor");
+                }
+            }
+
+            // Mensagem de Erro
+            TempData["SaveError"] = "Ocorreu um erro ao salvar as alterações. Tente novamente.";
+            return View(model);
+        }
+
+
+
 
         //
         // GET: /Account/RemoveLogin

@@ -1,0 +1,94 @@
+﻿@model LuccasCorpVX.Models.IndexProfessorViewModel
+@{
+    ViewBag.Title = "Gerenciar Professor";
+}
+
+<main aria-labelledby="title">
+    <h2 id="title">@ViewBag.Title</h2>
+    <div class="row">
+        <!-- Coluna de Informações do Professor -->
+        <div class="col-12 col-md-6 bg-light p-3">
+            <section id="professorDetails">
+                <h4>Alterar as configurações de conta do Professor</h4>
+                <hr />
+                <dl class="row">
+                    <dt class="col-md-3">Nome:</dt>
+                    <dd class="col-md-9">
+                        @Model.FirstName @Model.LastName
+                    </dd>
+
+                    <dt class="col-md-3">Email:</dt>
+                    <dd class="col-md-9">
+                        @Model.Email
+                    </dd>
+
+                    <dt class="col-md-3">Campus:</dt>
+                    <dd class="col-md-9">
+                        @Model.Campus
+                    </dd>
+
+                    <!-- Campo de Departamento para Edição (Dropdown) -->
+                    <dt class="col-md-3">Departamento:</dt>
+                    <dd class="col-md-9">
+                        @using (Html.BeginForm("EditProfessor", "Manage", FormMethod.Post, new { id = "editProfessorForm" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(model => model.Id) <!-- Manter o ID oculto para o envio correto -->
+
+                            <!-- Dropdown para selecionar o Departamento -->
+                            @Html.DropDownListFor(model => model.Departamento,
+                                new SelectList(new List<string> { "COSIS", "DECSI" }, Model.Departamento),
+                                "- Selecione um Departamento -",
+                                new { @class = "form-control", id = "departamentoInput" })
+                            @Html.ValidationMessageFor(model => model.Departamento, "", new { @class = "text-danger" })
+
+                            <!-- Botão para Enviar a Alteração -->
+                            <div class="mt-2">
+                                <input type="submit" value="Salvar Alterações" class="btn btn-outline-primary" id="saveButton" disabled style="opacity: 0.5;" />
+                            </div>
+                        }
+                    </dd>
+                </dl>
+
+                <!-- Mensagem de Feedback -->
+                @if (TempData["SaveSuccess"] != null)
+                {
+                    <div class="alert alert-success mt-3">
+                        @TempData["SaveSuccess"]
+                    </div>
+                }
+
+                @if (TempData["SaveError"] != null)
+                {
+                    <div class="alert alert-danger mt-3">
+                        @TempData["SaveError"]
+                    </div>
+                }
+            </section>
+        </div>
+
+        <!-- Coluna da Imagem -->
+        <div class="col-12 col-md-6 d-flex justify-content-center align-items-center bg-custom-blue p-3">
+            <img src="~/Images/logo_ufop_horizontal.png" alt="Imagem de configurações do professor" class="img-fluid rounded" style="max-width: 100%; height: auto;" />
+        </div>
+    </div>
+</main>
+
+@section Scripts {
+    <script>
+        // Monitorar se o campo Departamento foi alterado
+        const departamentoInput = document.getElementById('departamentoInput');
+        const saveButton = document.getElementById('saveButton');
+
+        // Mostrar o botão de salvar apenas se houver alteração
+        departamentoInput.addEventListener('change', function () {
+            if (departamentoInput.value !== '@Model.Departamento') {
+                saveButton.disabled = false; // Habilita o botão
+                saveButton.style.opacity = 1; // Torna o botão visível
+            } else {
+                saveButton.disabled = true; // Desabilita o botão
+                saveButton.style.opacity = 0.5; // Esmaece o botão
+            }
+        });
+    </script>
+}

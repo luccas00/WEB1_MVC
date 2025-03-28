@@ -14,7 +14,7 @@ namespace LuccasCorpVX.Models
         [Required]
         [StringLength(100)]
         [Display(Name = "Nome")]
-        public string Name { get; set; }
+        public string Nome { get; set; }
 
         [Required]
         [EmailAddress]
@@ -25,7 +25,7 @@ namespace LuccasCorpVX.Models
         [DataType(DataType.MultilineText)]
         public string Message { get; set; }
 
-        public DateTime DateSent { get; set; } = DateTime.Now; // Data e hora de envio
+        public DateTime CreatedOn { get; set; } = DateTime.Now; // Data e hora de envio
 
         public string Sentimento { get; set; }
         public double Positivo { get; set; }

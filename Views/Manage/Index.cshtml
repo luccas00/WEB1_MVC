@@ -1,14 +1,57 @@
-﻿@{
-    ViewBag.Title = "Página Inicial";
+﻿@model LuccasCorpVX.Models.IndexViewModel
+@{
+    ViewBag.Title = "Gerenciar";
 }
 
-<br />
-<br />
-<br />
-<br />
+<main aria-labelledby="title">
+    <h2 id="title">@ViewBag.Title</h2>
+    <div class="row">
+        <!-- Coluna de Configurações da Conta -->
+        <div class="col-12 col-md-6 bg-light p-3">
+            <section id="accountSettings">
+                <p class="text-success">@ViewBag.StatusMessage</p>
+                <h4>Alterar as configurações de conta</h4>
+                <hr />
+                <dl class="row">
+                    <dt class="col-md-3">Nome:</dt>
+                    <dd class="col-md-9">
+                        @Model.FirstName @Model.LastName
+                    </dd>
 
-<div style="display: flex; justify-content: center; align-items: center; text-align: center;">
-    <div>
-        <h1 class="display-4">Luccas Corp</h1>
+                    <dt class="col-md-3">Email:</dt>
+                    <dd class="col-md-9">
+                        @Model.Email
+                    </dd>
+
+                    <!-- Exibir o número de matrícula aqui -->
+                    <dt class="col-md-3">Número de Matrícula:</dt>
+                    <dd class="col-md-9">
+                        @Model.NumeroMatricula
+                    </dd>
+
+                    <dt class="col-md-3">
+                        <br />
+                    </dt>
+
+                    <dd class="col-md-9">
+
+                        @if (Model.HasPassword)
+                        {
+                            @Html.ActionLink("Alterar sua senha", "ChangePassword", null, new { @class = "btn btn-outline-dark rounded-pill shadow-sm" })
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Criar", "SetPassword", null, new { @class = "btn btn-outline-dark rounded-pill shadow-sm" })
+                        }
+
+                    </dd>
+                </dl>
+            </section>
+        </div>
+
+        <!-- Coluna da Imagem -->
+        <div class="col-12 col-md-6 d-flex justify-content-center align-items-center bg-custom-blue p-3">
+            <img src="~/Images/logo_ufop_horizontal.png" alt="Imagem de configurações de conta" class="img-fluid rounded" style="max-width: 100%; height: auto;" />
+        </div>
     </div>
-</div>
+</main>

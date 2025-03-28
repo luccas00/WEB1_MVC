@@ -12,6 +12,26 @@ namespace LuccasCorpVX.Models
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
+        public string NumeroMatricula { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+    }
+
+    public class IndexProfessorViewModel
+    {
+        public bool HasPassword { get; set; }
+        public IList<UserLoginInfo> Logins { get; set; }
+        public string PhoneNumber { get; set; }
+        public bool TwoFactor { get; set; }
+        public bool BrowserRemembered { get; set; }
+        public byte[] Foto { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string Campus { get; set; }
+        public string Id { get; set; }
+        public string Departamento { get; set; }
     }
 
     public class ManageLoginsViewModel
@@ -28,14 +48,14 @@ namespace LuccasCorpVX.Models
     public class SetPasswordViewModel
     {
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "O/A {0} deve ter no mínimo {2} caracteres.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
+        [Display(Name = "Nova senha")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Display(Name = "Confirmar nova senha")]
+        [Compare("NewPassword", ErrorMessage = "A nova senha e a senha de confirmação não correspondem.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -43,20 +63,53 @@ namespace LuccasCorpVX.Models
     {
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Current password")]
+        [Display(Name = "Senha atual")]
         public string OldPassword { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "O/A {0} deve ter no mínimo {2} caracteres.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
+        [Display(Name = "Nova senha")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Display(Name = "Confirmar nova senha")]
+        [Compare("NewPassword", ErrorMessage = "A nova senha e a senha de confirmação não correspondem.")]
         public string ConfirmPassword { get; set; }
     }
+
+    //public class SetPasswordViewModel
+    //{
+    //    [Required]
+    //    [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+    //    [DataType(DataType.Password)]
+    //    [Display(Name = "New password")]
+    //    public string NewPassword { get; set; }
+
+    //    [DataType(DataType.Password)]
+    //    [Display(Name = "Confirm new password")]
+    //    [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+    //    public string ConfirmPassword { get; set; }
+    //}
+
+    //public class ChangePasswordViewModel
+    //{
+    //    [Required]
+    //    [DataType(DataType.Password)]
+    //    [Display(Name = "Current password")]
+    //    public string OldPassword { get; set; }
+
+    //    [Required]
+    //    [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+    //    [DataType(DataType.Password)]
+    //    [Display(Name = "New password")]
+    //    public string NewPassword { get; set; }
+
+    //    [DataType(DataType.Password)]
+    //    [Display(Name = "Confirm new password")]
+    //    [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+    //    public string ConfirmPassword { get; set; }
+    //}
 
 
     public class AddPhoneNumberViewModel

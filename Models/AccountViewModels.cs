@@ -49,8 +49,9 @@ namespace LuccasCorpVX.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
         [EmailAddress]
+        [RegularExpression(@"^[a-zA-Z0-9._%+-]+@(aluno.ufop.edu.br|ufop.edu.br)$", ErrorMessage = "O e-mail deve ser do domínio @aluno.ufop.edu.br ou @ufop.edu.br")]
+        [Display(Name = "Email")]
         public string Email { get; set; }
 
         [Required]
@@ -111,6 +112,7 @@ namespace LuccasCorpVX.Models
     {
         [Required]
         [EmailAddress]
+        [RegularExpression(@"^[a-zA-Z0-9._%+-]+@(aluno.ufop.edu.br|ufop.edu.br)$", ErrorMessage = "O e-mail deve ser do domínio @aluno.ufop.edu.br ou @ufop.edu.br")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
@@ -132,7 +134,8 @@ namespace LuccasCorpVX.Models
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "E-mail")]
+        [RegularExpression(@"^[a-zA-Z0-9._%+-]+@(aluno.ufop.edu.br|ufop.edu.br)$", ErrorMessage = "O e-mail deve ser do domínio @aluno.ufop.edu.br ou @ufop.edu.br")]
+        [Display(Name = "Email")]
         public string Email { get; set; }
     }
 }
