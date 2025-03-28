@@ -26,8 +26,6 @@ namespace LuccasCorpVX.Models
         [Display(Name = "LastName")]
         public string LastName { get; set; }
 
-        public byte[] Foto { get; set; }
-
         [Required]
         [StringLength(100)]
         [Display(Name = "Campus")]
@@ -40,6 +38,10 @@ namespace LuccasCorpVX.Models
         public DateTime CreatedOn { get; set; } = DateTime.Now; // Data e hora de envio
 
         public bool Ativo { get; set; }
+
+        public double Media { get; set; }
+
+        public string AvaliacaoGeral { get; set; }
 
     }
 }

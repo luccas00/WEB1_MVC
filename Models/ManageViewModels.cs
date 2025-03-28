@@ -32,6 +32,8 @@ namespace LuccasCorpVX.Models
         public string Campus { get; set; }
         public string Id { get; set; }
         public string Departamento { get; set; }
+        public string AvaliacaoGeral { get; set; }
+        public double Media { get; set; }
     }
 
     public class ManageLoginsViewModel

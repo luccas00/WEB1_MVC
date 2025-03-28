@@ -28,5 +28,9 @@ namespace LuccasCorpVX.Models
 
         public bool Ativo { get; set; }
 
+        public double Media { get; set; }
+        
+        public string AvaliacaoGeral { get; set; }
+
     }
 }

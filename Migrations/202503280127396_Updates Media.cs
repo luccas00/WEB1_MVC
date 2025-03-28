@@ -3,12 +3,12 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Updates : DbMigration
+    public partial class UpdatesMedia : DbMigration
     {
         public override void Up()
         {
             CreateTable(
-                "dbo.Alunoes",
+                "dbo.Alunos",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 100),
@@ -42,18 +42,33 @@
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.Professors",
+                "dbo.Disciplinas",
+                c => new
+                    {
+                        Codigo = c.Int(nullable: false, identity: true),
+                        Nome = c.String(nullable: false, maxLength: 100),
+                        Campus = c.String(nullable: false, maxLength: 100),
+                        Departamento = c.String(nullable: false, maxLength: 100),
+                        Ativo = c.Boolean(nullable: false),
+                        Media = c.Double(nullable: false),
+                        AvaliacaoGeral = c.String(),
+                    })
+                .PrimaryKey(t => t.Codigo);
+            
+            CreateTable(
+                "dbo.Professores",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 100),
                         Email = c.String(nullable: false),
                         FirstName = c.String(nullable: false, maxLength: 100),
                         LastName = c.String(nullable: false, maxLength: 100),
-                        Foto = c.Binary(),
                         Campus = c.String(nullable: false, maxLength: 100),
                         Departamento = c.String(maxLength: 100),
                         CreatedOn = c.DateTime(nullable: false),
                         Ativo = c.Boolean(nullable: false),
+                        Media = c.Double(nullable: false),
+                        AvaliacaoGeral = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -73,9 +88,10 @@
             DropColumn("dbo.AspNetUsers", "Tipo");
             DropColumn("dbo.ContactMessages", "CreatedOn");
             DropColumn("dbo.ContactMessages", "Nome");
-            DropTable("dbo.Professors");
+            DropTable("dbo.Professores");
+            DropTable("dbo.Disciplinas");
             DropTable("dbo.Comentarios");
-            DropTable("dbo.Alunoes");
+            DropTable("dbo.Alunos");
         }
     }
 }

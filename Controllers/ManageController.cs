@@ -96,12 +96,12 @@ namespace LuccasCorpVX.Controllers
                 : message == ManageMessageId.RemovePhoneSuccess ? "Seu número de telefone foi removido."
                 : "";
 
-            //var numeroMatricula = await _context.GetNumeroMatriculaAsync(userId); // Aqui está o uso do método
-            var firstName = await _context.GetFirstNameAsync(userId); // Aqui está o uso do método
-            var lastName = await _context.GetLastNameAsync(userId); // Aqui está o uso do método
-            var campus = await _context.GetCampusAsync(userId); // Aqui está o uso do método
-            var departamento = await _context.GetDepartamentoAsync(userId); // Aqui está o uso do método
-            var foto = await _context.GetFotoAsync(userId); // Aqui está o uso do método
+            var firstName = await _context.GetFirstNameAsync(userId);
+            var lastName = await _context.GetLastNameAsync(userId);
+            var campus = await _context.GetCampusAsync(userId);
+            var departamento = await _context.GetDepartamentoAsync(userId);
+            var media = await _context.GetMediaAsync(userId);
+            var avaliacaoGeral = await _context.GetAvaliacaoGeralAsync(userId);
 
             var model = new IndexProfessorViewModel
             {
@@ -110,7 +110,8 @@ namespace LuccasCorpVX.Controllers
                 FirstName = firstName,
                 LastName = lastName,
                 Email = await UserManager.GetEmailAsync(userId),
-                Foto = foto,
+                Media = media,
+                AvaliacaoGeral = avaliacaoGeral,
                 Campus = campus,
                 Departamento = departamento,
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
@@ -119,16 +120,6 @@ namespace LuccasCorpVX.Controllers
                 Id = userId
             };
             return View(model);
-        }
-
-        public ActionResult ExibirFoto(string id)
-        {
-            var professor = _context.Professores.Find(id);
-            if (professor != null && professor.Foto != null)
-            {
-                return File(professor.Foto, "image/jpeg"); // ou "image/png" dependendo do formato da imagem
-            }
-            return HttpNotFound();
         }
 
 

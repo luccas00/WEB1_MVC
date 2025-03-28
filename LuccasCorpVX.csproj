@@ -295,25 +295,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202503200206406_InitialCreate.cs" />
-    <Compile Include="Migrations\202503200206406_InitialCreate.Designer.cs">
-      <DependentUpon>202503200206406_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202503200207327_Update.cs" />
-    <Compile Include="Migrations\202503200207327_Update.Designer.cs">
-      <DependentUpon>202503200207327_Update.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202503220033238_Updates.cs" />
-    <Compile Include="Migrations\202503220033238_Updates.Designer.cs">
-      <DependentUpon>202503220033238_Updates.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202503220035548_FixNames.cs" />
-    <Compile Include="Migrations\202503220035548_FixNames.Designer.cs">
-      <DependentUpon>202503220035548_FixNames.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202503221900007_Update1.cs" />
-    <Compile Include="Migrations\202503221900007_Update1.Designer.cs">
-      <DependentUpon>202503221900007_Update1.cs</DependentUpon>
+    <Compile Include="Migrations\202503280127396_Updates Media.cs" />
+    <Compile Include="Migrations\202503280127396_Updates Media.Designer.cs">
+      <DependentUpon>202503280127396_Updates Media.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -492,20 +476,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202503200206406_InitialCreate.resx">
-      <DependentUpon>202503200206406_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202503200207327_Update.resx">
-      <DependentUpon>202503200207327_Update.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202503220033238_Updates.resx">
-      <DependentUpon>202503220033238_Updates.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202503220035548_FixNames.resx">
-      <DependentUpon>202503220035548_FixNames.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202503221900007_Update1.resx">
-      <DependentUpon>202503221900007_Update1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202503280127396_Updates Media.resx">
+      <DependentUpon>202503280127396_Updates Media.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -51,6 +51,23 @@ namespace LuccasCorpVX.Models
             return new ApplicationDbContext();
         }
 
+
+        public async Task<double> GetMediaAsync(string userId)
+        {
+            // Supondo que você tenha uma tabela associada ou um campo na tabela de usuários
+            var user = await this.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            var professor = await this.Professores.FirstOrDefaultAsync(p => p.Email == user.Email);
+            return professor.Media; // Retorna a média do Professor
+        }
+
+        public async Task<string> GetAvaliacaoGeralAsync(string userId)
+        {
+            // Supondo que você tenha uma tabela associada ou um campo na tabela de usuários
+            var user = await this.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            var professor = await this.Professores.FirstOrDefaultAsync(p => p.Email == user.Email);
+            return professor?.AvaliacaoGeral; // Retorna a avaliação geral do Professor
+        }
+
         public async Task<string> GetDepartamentoAsync(string userId)
         {
             // Supondo que você tenha uma tabela associada ou um campo na tabela de usuários
@@ -65,14 +82,6 @@ namespace LuccasCorpVX.Models
             var user = await this.Users.FirstOrDefaultAsync(u => u.Id == userId);
             var professor = await this.Professores.FirstOrDefaultAsync(p => p.Email == user.Email);
             return professor?.Campus; // Retorna o campus do Professor
-        }
-
-        public async Task<byte[]> GetFotoAsync(string userId)
-        {
-            // Supondo que você tenha uma tabela associada ou um campo na tabela de usuários
-            var user = await this.Users.FirstOrDefaultAsync(u => u.Id == userId);
-            var professor = await this.Professores.FirstOrDefaultAsync(p => p.Email == user.Email);
-            return professor?.Foto; // Retorna a foto do Professor
         }
 
         public async Task<string> GetTipoAsync(string userId)
