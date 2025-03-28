@@ -60,3 +60,7 @@
   
   - [HTML Tutorial](https://www.w3schools.com/html/default.asp)
   - [CSS Tutorial](https://www.w3schools.com/css/default.asp)
+
+### 7. Diagrama de Classe
+
+﻿![Diagrama de Classe DB Diagram](Images/WebI_MVC_LuccasCorpVX.svg)
