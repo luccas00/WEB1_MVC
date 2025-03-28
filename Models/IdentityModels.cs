@@ -13,9 +13,13 @@ namespace LuccasCorpVX.Models
     public class ApplicationUser : IdentityUser
     {
         public string NumeroMatricula { get; set; }
+
         public string FirstName { get; set; }
+
         public string LastName { get; set; }
+
         public string Tipo { get; set; }
+
         public DateTime CreatedOn { get; set; } = DateTime.Now; // Data e hora de criação
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

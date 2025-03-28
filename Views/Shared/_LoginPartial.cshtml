@@ -1,28 +1,37 @@
-﻿@using Microsoft.AspNet.Identity
+﻿    @using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
         @Html.AntiForgeryToken()
 
-    <ul class="navbar-nav navbar-right">
-        @if (ViewBag.Tipo == "Aluno")
-        {
-            <li>
-                @Html.ActionLink("Olá " + (string)ViewBag.FullName + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "nav-link" })
-            </li>
+<ul class="navbar-nav navbar-right">
+    <li>
+        @Html.ActionLink("Disciplinas", "Index", "Disciplinas", routeValues: null, htmlAttributes: new { title = "Disciplinas", @class = "nav-link" })
+    </li>
+    <li>
+        @Html.ActionLink("Professores", "Index", "Professores", routeValues: null, htmlAttributes: new { title = "Professores", @class = "nav-link" })
+    </li>
+    <li>
+        @Html.ActionLink("Comentarios", "Index", "Comentarios", routeValues: null, htmlAttributes: new { title = "Comentarios", @class = "nav-link" })
+    </li>
+    @if (ViewBag.Tipo == "Aluno")
+    {
+        <li>
+            @Html.ActionLink("Olá " + (string)ViewBag.FullName + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "nav-link" })
+        </li>
 
-        }
-        else
-        {
-            <li>
-                @Html.ActionLink("Olá " + (string)ViewBag.FullName + "!", "IndexProfessor", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "nav-link" })
-            </li>
+    }
+    else
+    {
+        <li>
+            @Html.ActionLink("Olá " + (string)ViewBag.FullName + "!", "IndexProfessor", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "nav-link" })
+        </li>
 
-        }
+    }
 
-        <li><a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Fazer logoff</a></li>
-    </ul>
+    <li><a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Fazer logoff</a></li>
+</ul>
         }
     }
 else

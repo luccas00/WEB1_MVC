@@ -1,59 +1,57 @@
 ﻿@model IEnumerable<LuccasCorpVX.Models.Disciplinas>
 
-@{
-    Layout = null;
-}
+<main aria-labelledby="title" class="container mt-5">
+    <!-- Coluna da Imagem -->
+    <div class="row mb-4">
+        <div class="col-12 d-flex justify-content-center align-items-center bg-custom-blue" style="height: 150px;">
+            <img src="~/Images/logo_ufop_horizontal.png" alt="Logo UFOP" class="img-fluid rounded" style="max-width: 80%; height: auto;" />
+        </div>
+    </div>
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Campus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Departamento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ativo)
-            </th>
-            <th></th>
-        </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Campus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Departamento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ativo)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Codigo }) |
-                @Html.ActionLink("Details", "Details", new { id=item.Codigo }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Codigo })
-            </td>
-        </tr>
-    }
-    
-    </table>
-</body>
-</html>
+    <!-- Tabela de Disciplinas -->
+    <div class="row">
+        <div class="col-12 bg-light d-flex flex-column">
+            <table class="table">
+                <tr>
+                    <th>
+                        Código
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nome)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Campus)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Departamento)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CodigoUFOP)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Campus)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Departamento)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Novo Comentario", "Edit", new { id = item.Codigo })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+
+</main>

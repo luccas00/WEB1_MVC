@@ -295,9 +295,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202503280127396_Updates Media.cs" />
-    <Compile Include="Migrations\202503280127396_Updates Media.Designer.cs">
-      <DependentUpon>202503280127396_Updates Media.cs</DependentUpon>
+    <Compile Include="Migrations\202503280257205_Updates.cs" />
+    <Compile Include="Migrations\202503280257205_Updates.Designer.cs">
+      <DependentUpon>202503280257205_Updates.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -447,27 +447,14 @@
     <Content Include="Views\ContactMessages\Index.cshtml" />
     <Content Include="Views\Manage\IndexProfessor.cshtml" />
     <Content Include="Views\Manage\EditProfessor2.cshtml" />
-    <Content Include="Views\Alunos\Create.cshtml" />
-    <Content Include="Views\Alunos\Delete.cshtml" />
-    <Content Include="Views\Alunos\Details.cshtml" />
-    <Content Include="Views\Alunos\Edit.cshtml" />
-    <Content Include="Views\Alunos\Index.cshtml" />
-    <Content Include="Views\Professores\Create.cshtml" />
-    <Content Include="Views\Professores\Delete.cshtml" />
-    <Content Include="Views\Professores\Details.cshtml" />
-    <Content Include="Views\Professores\Edit.cshtml" />
-    <Content Include="Views\Professores\Index.cshtml" />
-    <Content Include="Views\Disciplinas\Create.cshtml" />
-    <Content Include="Views\Disciplinas\Delete.cshtml" />
-    <Content Include="Views\Disciplinas\Details.cshtml" />
     <Content Include="Views\Disciplinas\Edit.cshtml" />
     <Content Include="Views\Disciplinas\Index.cshtml" />
     <Content Include="Views\Comentarios\Create.cshtml" />
     <Content Include="Views\Comentarios\Delete.cshtml" />
     <Content Include="Views\Comentarios\Details.cshtml" />
-    <Content Include="Views\Comentarios\Edit.cshtml" />
     <Content Include="Views\Comentarios\Index.cshtml" />
     <Content Include="Views\Manage\EditProfessor.cshtml" />
+    <Content Include="Views\Professores\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -476,8 +463,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202503280127396_Updates Media.resx">
-      <DependentUpon>202503280127396_Updates Media.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202503280257205_Updates.resx">
+      <DependentUpon>202503280257205_Updates.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

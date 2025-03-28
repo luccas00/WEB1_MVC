@@ -11,6 +11,8 @@ namespace LuccasCorpVX.Models
         [Key]
         public int Codigo { get; set; } // Chave primária
 
+        public string CodigoUFOP { get; set; }
+
         [Required]
         [StringLength(100)]
         [Display(Name = "Nome")]
