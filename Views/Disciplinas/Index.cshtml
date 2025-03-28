@@ -45,7 +45,7 @@
                             @Html.DisplayFor(modelItem => item.Departamento)
                         </td>
                         <td>
-                            @Html.ActionLink("Novo Comentario", "Edit", new { id = item.Codigo })
+                            @Html.ActionLink("Novo Comentario", "Create", "Comentarios", new { id = item.Codigo, tipo = "Disciplina" }, null)
                         </td>
                     </tr>
                 }

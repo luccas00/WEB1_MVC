@@ -249,20 +249,21 @@ namespace LuccasCorpVX.Controllers
                             };
                             context.Alunos.Add(aluno);
                         }
-                        else
-                        {
-                            // Criar um registro na tabela Professores
-                            var professor = new Professores
-                            {
-                                FirstName = user.FirstName,
-                                LastName = user.LastName,
-                                Email = user.Email,
-                                Id = user.Id,
-                                Ativo = true,
-                                Campus = "ICEA"
-                            };
-                            context.Professores.Add(professor);
-                        }
+                        //else
+                        //{
+
+                        //    // Criar um registro na tabela Professores
+                        //    var professor = _context.Professores.FirstOrDefault(p => p.Email == user.Email);
+                        //    {
+                        //        FirstName = user.FirstName,
+                        //        LastName = user.LastName,
+                        //        Email = user.Email,
+                        //        Id = user.Id,
+                        //        Ativo = true,
+                        //        Campus = "ICEA"
+                        //    };
+                        //    context.Professores.Add(professor);
+                        //}
 
                         await context.SaveChangesAsync(); // Salvar no banco de dados
                     }

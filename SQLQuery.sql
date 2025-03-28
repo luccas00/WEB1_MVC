@@ -42,3 +42,53 @@ VALUES
 ('CSI303', 'SEGURANCA E AUDITORIA DE SISTEMAS', 'ICEA', 'DECSI', 1, 0, ''),
 ('CSI605', 'SISTEMAS DE APOIO A DECISAO', 'ICEA', 'DECSI', 1, 0, ''),
 ('CSI999', 'TRABALHO DE CONCLUSAO DE CURSO II', 'ICEA', 'DECSI', 1, 0, '');
+
+SELECT * from ContactMessages
+
+select * from Professores
+
+delete from Professores
+
+INSERT INTO Professores (Id, Email, FirstName, LastName, Campus, Departamento, CreatedOn, Ativo, Media, AvaliacaoGeral)  
+VALUES  
+('1', 'alexandre.sousa@ufop.edu.br', 'Alexandre Magno', 'de Souza', 'UFOP', 'DECSI', GETDATE(), 1, 0, ''),
+('2', 'brhott@ufop.edu.br', 'Bruno', 'Cerqueira Hott', 'UFOP', 'DECSI', GETDATE(), 1, 0, ''),
+('3', 'bruno.ps@ufop.edu.br', 'Bruno', 'Pereira dos Santos', 'UFOP', 'DECSI', GETDATE(), 1, 0, ''),
+('4', 'bruno@ufop.edu.br', 'Bruno', 'Rabello Monteiro', 'UFOP', 'DECSI', GETDATE(), 1, 0, ''),
+('5', 'chgferreira@ufop.edu.br', 'Carlos Henrique', 'Gomes Ferreira', 'UFOP', 'DECSI', GETDATE(), 1, 0, ''),
+('6', 'darlan@ufrop.edu.br', 'Darlan', 'Nunes de Brito', 'UFOP', 'DECSI', GETDATE(), 1, 0, ''),
+('7', 'diego@ufrop.edu.br', 'Diego Zuquim', 'Guimarães Garcia', 'UFOP', 'DECSI', GETDATE(), 1, 0, ''),
+('8', 'eduardo.ribeiro@ufrop.edu.br', 'Eduardo', 'da Silva Ribeiro', 'UFOP', 'DECSI', GETDATE(), 1, 0, ''),
+('9', 'eltonmc@ufop.edu.br', 'Elton Máximo', 'Cardoso', 'UFOP', 'DECSI', GETDATE(), 1, 0, ''),
+('10', 'euler@ufop.edu.br', 'Euler', 'Horta Marinho', 'UFOP', 'DECSI', GETDATE(), 1, 0, ''),
+('11', 'fboliveira@ufop.edu.br', 'Fernando Bernardes', 'de Oliveira', 'UFOP', 'DECSI', GETDATE(), 1, 0, ''),
+('12', 'filipe.ribeiro@ufop.edu.br', 'Filipe', 'Nunes Ribeiro', 'UFOP', 'DECSI', GETDATE(), 1, 0, ''),
+('13', 'george@ufop.edu.br', 'George Henrique', 'Godim da Fonseca', 'UFOP', 'DECSI', GETDATE(), 1, 0, ''),
+('14', 'gildaaa@ufop.edu.br', 'Gilda Aparecida', 'de Assis', 'UFOP', 'DECSI', GETDATE(), 1, 0, ''),
+('15', 'harlei@ufop.edu.br', 'Harlei Miguel', 'Arruda Leite', 'UFOP', 'DECSI', GETDATE(), 1, 0, ''),
+('16', 'helen@ufop.edu.br', 'Helen de Cássia', 'Sousa da Costa Lima', 'UFOP', 'DECSI', GETDATE(), 1, 0, ''),
+('17', 'igormuzetti@ufop.edu.br', 'Igor Muzetti', 'Pereira', 'UFOP', 'DECSI', GETDATE(), 1, 0, ''),
+('18', 'janniele@ufop.edu.br', 'Janniele Aparecida', 'Soares', 'UFOP', 'DECSI', GETDATE(), 1, 0, ''),
+('19', 'lucineia@ufop.edu.br', 'Lucinéia Souza', 'Maia', 'UFOP', 'DECSI', GETDATE(), 1, 0, ''),
+('20', 'luiz.torres@ufop.edu.br', 'Luiz Carlos', 'Bambirra Torres', 'UFOP', 'DECSI', GETDATE(), 1, 0, ''),
+('21', 'marlon@ufop.edu.br', 'Marlon Paolo', 'Lima', 'UFOP', 'DECSI', GETDATE(), 1, 0, ''),
+('22', 'mateus@ufop.edu.br', 'Mateus Ferreira', 'Satler', 'UFOP', 'DECSI', GETDATE(), 1, 0, ''),
+('23', 'rfalexandre@ufop.edu.br', 'Rafael Frederico', 'Alexandre', 'UFOP', 'DECSI', GETDATE(), 1, 0, ''),
+('24', 'samuelbrito@ufop.edu.br', 'Samuel Souza', 'Brito', 'UFOP', 'DECSI', GETDATE(), 1, 0, ''),
+('25', 'talles@ufop.edu.br', 'Talles Henrique', 'de Medeiros', 'UFOP', 'DECSI', GETDATE(), 1, 0, ''),
+('26', 'tatiana@ufop.edu.br', 'Tatiana', 'Alves Costa', 'UFOP', 'DECSI', GETDATE(), 1, 0, ''),
+('27', 'theo@ufop.edu.br', 'Theo', 'Silva Lins', 'UFOP', 'DECSI', GETDATE(), 1, 0, ''),
+('28', 'thiagoluange@ufop.edu.br', 'Thiago Luange', 'Gomes', 'UFOP', 'DECSI', GETDATE(), 1, 0, ''),
+('29', 'tiagolima@decsi.ufop.edu.br', 'Tiago França Melo', 'de Lima', 'UFOP', 'DECSI', GETDATE(), 1, 0, ''),
+('30', 'vjpamorim@ufop.edu.br', 'Vicente José', 'Peixoto de Amorim', 'UFOP', 'DECSI', GETDATE(), 1, 0, ''),
+('31', 'viniciusvdias@ufop.edu.br', 'Vinícius Vitor', 'dos Santos Dias', 'UFOP', 'DECSI', GETDATE(), 1, 0, '');
+
+INSERT INTO Professores (Id, Email, FirstName, LastName, Campus, Departamento, CreatedOn, Ativo, Media, AvaliacaoGeral)  
+VALUES  
+('0', 'professor@ufop.edu.br', 'Professor', 'Teste', 'UFOP', 'DECSI', GETDATE(), 1, 0, '')
+
+select * from AspNetUsers
+
+update AspNetUsers
+set EmailConfirmed = 1
+where Id = '058ccae5-dedf-4a8b-b96e-f23781dc2336'

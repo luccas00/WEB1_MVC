@@ -11,7 +11,7 @@ namespace LuccasCorpVX.Models
         [Key]
         public int Id { get; set; } // Chave primária
 
-        [Required]
+        //[Required]
         [StringLength(100)]
         [Display(Name = "Nome")]
         public string Nome { get; set; }

@@ -25,7 +25,14 @@ namespace LuccasCorpVX.Models
         public string Autor { get; set; }
 
         public int Professor { get; set; }
+        
+        public string ProfessorNome { get; set; }
+
         public int Disciplina { get; set; }
+
+        public string DisciplinaNome { get; set; }
+
+        public string DisciplinaCodigo { get; set; }
 
         public DateTime CreatedOn { get; set; } = DateTime.Now; // Data e hora de envio
         public string Sentimento { get; set; }

@@ -4,20 +4,32 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using LuccasCorpVX.Models;
+using Microsoft.AspNet.Identity;
 
 namespace LuccasCorpVX.Controllers
 {
     public class ComentariosController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext _context;
 
-        // GET: Comentarios
-        public ActionResult Index()
+        public ComentariosController()
         {
-            return View(db.Comentarios.ToList());
+            _context = new ApplicationDbContext();
+        }
+
+        [Authorize]
+        public async Task<ActionResult> Index()
+        {
+            var userId = User.Identity.GetUserId();
+            var fullName = await ApplicationDbContext.GetFullNameAsync(userId);
+
+            ViewBag.FullName = fullName;
+
+            return View(_context.Comentarios.ToList());
         }
 
         // GET: Comentarios/Details/5
@@ -27,7 +39,7 @@ namespace LuccasCorpVX.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comentario comentario = db.Comentarios.Find(id);
+            Comentario comentario = _context.Comentarios.Find(id);
             if (comentario == null)
             {
                 return HttpNotFound();
@@ -36,9 +48,49 @@ namespace LuccasCorpVX.Controllers
         }
 
         // GET: Comentarios/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create(int? id, string tipo)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            string disciplinaString = string.Empty;
+            string professorString = string.Empty;
+
+            if (tipo.Equals("Disciplina"))
+            {
+                Disciplinas disciplina = _context.Disciplinas.Find(id);
+                disciplinaString = disciplina.Nome;
+                if (disciplina == null)
+                {
+                    return HttpNotFound();
+                }
+            }
+            else
+            {
+                Professores professor = _context.Professores.Find(id);
+                professorString = professor.FirstName + " " + professor.LastName;
+                if (professor == null)
+                {
+                    return HttpNotFound();
+                }
+            }
+
+            ViewBag.Id = id;
+            ViewBag.Tipo = tipo;
+            ViewBag.AutorName = await ApplicationDbContext.GetFullNameAsync(User.Identity.GetUserId());
+            ViewBag.AutorID = User.Identity.GetUserId();
+            ViewBag.AutorEmail = User.Identity.GetUserName();
+            ViewBag.Disciplina = disciplinaString;
+            ViewBag.Professor = professorString;
+
+            Comentario comentario = new Comentario();
+            comentario.CreatedOn = DateTime.Now;
+            comentario.Ativo = true;
+            comentario.Autor = User.Identity.GetUserName();
+
+            return View("Create", comentario);
         }
 
         // POST: Comentarios/Create
@@ -46,47 +98,12 @@ namespace LuccasCorpVX.Controllers
         // obter mais detalhes, veja https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Titulo,Descricao,Autor,Professor,Disciplina,CreatedOn,Sentimento,Positivo,Negativo,Neutro,Insulto,Ativo")] Comentario comentario)
+        public ActionResult Create(Comentario comentario)
         {
-            if (ModelState.IsValid)
-            {
-                db.Comentarios.Add(comentario);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            _context.Comentarios.Add(comentario);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
 
-            return View(comentario);
-        }
-
-        // GET: Comentarios/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Comentario comentario = db.Comentarios.Find(id);
-            if (comentario == null)
-            {
-                return HttpNotFound();
-            }
-            return View(comentario);
-        }
-
-        // POST: Comentarios/Edit/5
-        // Para se proteger de mais ataques, habilite as propriedades específicas às quais você quer se associar. Para 
-        // obter mais detalhes, veja https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Titulo,Descricao,Autor,Professor,Disciplina,CreatedOn,Sentimento,Positivo,Negativo,Neutro,Insulto,Ativo")] Comentario comentario)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(comentario).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(comentario);
         }
 
         // GET: Comentarios/Delete/5
@@ -96,7 +113,7 @@ namespace LuccasCorpVX.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comentario comentario = db.Comentarios.Find(id);
+            Comentario comentario = _context.Comentarios.Find(id);
             if (comentario == null)
             {
                 return HttpNotFound();
@@ -109,9 +126,9 @@ namespace LuccasCorpVX.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Comentario comentario = db.Comentarios.Find(id);
-            db.Comentarios.Remove(comentario);
-            db.SaveChanges();
+            Comentario comentario = _context.Comentarios.Find(id);
+            _context.Comentarios.Remove(comentario);
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -119,7 +136,7 @@ namespace LuccasCorpVX.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _context.Dispose();
             }
             base.Dispose(disposing);
         }

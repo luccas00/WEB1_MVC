@@ -22,33 +22,6 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
-        <!-- Controle para a foto -->
-        <div class="form-group">
-            @Html.LabelFor(model => model.Foto, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="file" name="Foto" class="form-control" />
-                @Html.ValidationMessageFor(model => model.Foto, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Foto, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @if (Model.Foto != null && Model.Foto.Length > 0)
-                {
-                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Foto)" alt="Foto do Professor" class="img-fluid rounded-circle" style="max-width: 100px; height: auto;" />
-                }
-                else
-                {
-                    <p>Sem foto disponível</p>
-                }
-                <input type="file" name="Foto" class="form-control" />
-                @Html.ValidationMessageFor(model => model.Foto, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-
         <!-- Campo para o Departamento -->
         <div class="form-group">
             @Html.LabelFor(model => model.Departamento, htmlAttributes: new { @class = "control-label col-md-2" })

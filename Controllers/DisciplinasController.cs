@@ -4,122 +4,39 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using LuccasCorpVX.Models;
+using Microsoft.AspNet.Identity;
 
 namespace LuccasCorpVX.Controllers
 {
     public class DisciplinasController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext _context;
 
-        // GET: Disciplinas
-        public ActionResult Index()
+        public DisciplinasController()
         {
-            return View(db.Disciplinas.ToList());
+            _context = new ApplicationDbContext();
         }
 
-        // GET: Disciplinas/Details/5
-        public ActionResult Details(int? id)
+        // GET: Professores
+        public async Task<ActionResult> Index()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Disciplinas disciplinas = db.Disciplinas.Find(id);
-            if (disciplinas == null)
-            {
-                return HttpNotFound();
-            }
-            return View(disciplinas);
-        }
+            var userId = User.Identity.GetUserId();
+            var fullName = await ApplicationDbContext.GetFullNameAsync(userId);
 
-        // GET: Disciplinas/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+            ViewBag.FullName = fullName;
 
-        // POST: Disciplinas/Create
-        // Para se proteger de mais ataques, habilite as propriedades específicas às quais você quer se associar. Para 
-        // obter mais detalhes, veja https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Codigo,Nome,Campus,Departamento,Ativo")] Disciplinas disciplinas)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Disciplinas.Add(disciplinas);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(disciplinas);
-        }
-
-        // GET: Disciplinas/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Disciplinas disciplinas = db.Disciplinas.Find(id);
-            if (disciplinas == null)
-            {
-                return HttpNotFound();
-            }
-            return View(disciplinas);
-        }
-
-        // POST: Disciplinas/Edit/5
-        // Para se proteger de mais ataques, habilite as propriedades específicas às quais você quer se associar. Para 
-        // obter mais detalhes, veja https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Codigo,Nome,Campus,Departamento,Ativo")] Disciplinas disciplinas)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(disciplinas).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(disciplinas);
-        }
-
-        // GET: Disciplinas/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Disciplinas disciplinas = db.Disciplinas.Find(id);
-            if (disciplinas == null)
-            {
-                return HttpNotFound();
-            }
-            return View(disciplinas);
-        }
-
-        // POST: Disciplinas/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Disciplinas disciplinas = db.Disciplinas.Find(id);
-            db.Disciplinas.Remove(disciplinas);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            return View(_context.Disciplinas.ToList());
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                _context.Dispose();
             }
             base.Dispose(disposing);
         }

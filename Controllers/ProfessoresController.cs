@@ -7,55 +7,29 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using LuccasCorpVX.Models;
+using Microsoft.AspNet.Identity;
+using System.Threading.Tasks;
 
 namespace LuccasCorpVX.Controllers
 {
     public class ProfessoresController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext _context;
+
+        public ProfessoresController()
+        {
+            _context = new ApplicationDbContext();
+        }
 
         // GET: Professores
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View(db.Professores.ToList());
-        }
+            var userId = User.Identity.GetUserId();
+            var fullName = await ApplicationDbContext.GetFullNameAsync(userId);
 
-        // GET: Professores/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Professores professores = db.Professores.Find(id);
-            if (professores == null)
-            {
-                return HttpNotFound();
-            }
-            return View(professores);
-        }
+            ViewBag.FullName = fullName;
 
-        // GET: Professores/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Professores/Create
-        // Para se proteger de mais ataques, habilite as propriedades específicas às quais você quer se associar. Para 
-        // obter mais detalhes, veja https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Email,FirstName,LastName,Foto,Campus,Departamento,CreatedOn,Ativo")] Professores professores)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Professores.Add(professores);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(professores);
+            return View(_context.Professores.ToList());
         }
 
         // GET: Professores/Edit/5
@@ -65,7 +39,7 @@ namespace LuccasCorpVX.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Professores professores = db.Professores.Find(id);
+            Professores professores = _context.Professores.Find(id);
             if (professores == null)
             {
                 return HttpNotFound();
@@ -82,44 +56,18 @@ namespace LuccasCorpVX.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(professores).State = EntityState.Modified;
-                db.SaveChanges();
+                _context.Entry(professores).State = EntityState.Modified;
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(professores);
-        }
-
-        // GET: Professores/Delete/5
-        public ActionResult Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Professores professores = db.Professores.Find(id);
-            if (professores == null)
-            {
-                return HttpNotFound();
-            }
-            return View(professores);
-        }
-
-        // POST: Professores/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            Professores professores = db.Professores.Find(id);
-            db.Professores.Remove(professores);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                _context.Dispose();
             }
             base.Dispose(disposing);
         }
