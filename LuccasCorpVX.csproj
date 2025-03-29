@@ -356,16 +356,12 @@
     <Content Include="Images\LuccasCorpLogoTituloGray.png" />
     <Content Include="Images\WebI_MVC_LuccasCorpVX.png" />
     <Content Include="Images\WebI_MVC_LuccasCorpVX.svg" />
-    <Content Include="Images\WebI_MVC_LuccasCorpVXOld.svg" />
-    <Content Include="Images\WebI_MVC_LuccasCorpVXOld.pdf" />
-    <Content Include="DBDiagram.md" />
     <Content Include="Images\WebI_MVC_LuccasCorpVX.pdf" />
     <None Include="Properties\PublishProfiles\LuccasCorpV2 - Web Deploy.pubxml" />
     <Content Include="ILLink\ILLink.Descriptors.LibraryBuild.xml" />
     <Content Include="Images\logo-decsi.png" />
     <Content Include="Images\logo_ufop.png" />
     <Content Include="Images\logo_ufop_horizontal.png" />
-    <Content Include="Images\WebI_MVC_LuccasCorpVXOld.png" />
     <Content Include="MyScripts\formatarMatricula.js" />
     <Content Include="MyScripts\formatarTelefone.js" />
     <Content Include="MyScripts\verificarEmailUFOP.js" />
