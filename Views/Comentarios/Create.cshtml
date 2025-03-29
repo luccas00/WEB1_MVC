@@ -45,8 +45,11 @@
             <div class="form-group mb-3">
                 @Html.LabelFor(model => model.Autor, htmlAttributes: new { @class = "col-md-2 col-form-label" })
                 <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.Autor, new { @Value = ViewBag.AutorEmail, @class = "form-control rounded-pill shadow-sm", @readonly = "readonly" })
-                    @Html.ValidationMessageFor(model => model.Autor, "", new { @class = "text-danger" })
+                    @ViewBag.AutorEmail
+
+                    @Html.HiddenFor(model => model.Autor, new { @Value = ViewBag.AutorEmail, @class = "form-control rounded-pill shadow-sm", @readonly = "readonly" })
+                    @*@Html.TextBoxFor(model => model.Autor, new { @Value = ViewBag.AutorEmail, @class = "form-control rounded-pill shadow-sm", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.Autor, "", new { @class = "text-danger" })*@
                 </div>
             </div>
 
@@ -55,7 +58,8 @@
                 <div class="form-group mb-3">
                     @Html.LabelFor(model => model.Disciplina, htmlAttributes: new { @class = "col-md-2 col-form-label" })
                     <div class="col-md-10">
-                        @Html.TextBox("Disciplina", ViewBag.Disciplina as string, new { @class = "form-control rounded-pill shadow-sm", @readonly = "readonly" })
+                        @ViewBag.Disciplina
+                        @*@Html.TextBox("Disciplina", ViewBag.Disciplina as string, new { @class = "form-control rounded-pill shadow-sm", @readonly = "readonly" })*@
 
                         <!-- Campo oculto que contém o ID real da disciplina, enviado no formulário -->
                         @Html.HiddenFor(model => model.Disciplina, new { @Value = ViewBag.Id, @class = "form-control rounded-pill shadow-sm", @readonly = "readonly" })
@@ -68,7 +72,8 @@
                 <div class="form-group mb-3">
                     @Html.LabelFor(model => model.Professor, htmlAttributes: new { @class = "col-md-2 col-form-label" })
                     <div class="col-md-10">
-                        @Html.TextBox("Professor", ViewBag.Professor as string, new { @class = "form-control rounded-pill shadow-sm", @readonly = "readonly" })
+                        @ViewBag.Professor
+                        @*@Html.TextBox("Professor", ViewBag.Professor as string, new { @class = "form-control rounded-pill shadow-sm", @readonly = "readonly" })*@
 
                         <!-- Campo oculto que contém o ID real da disciplina, enviado no formulário -->
                         @Html.HiddenFor(model => model.Professor, new { @Value = ViewBag.Id, @class = "form-control rounded-pill shadow-sm", @readonly = "readonly" })

@@ -454,6 +454,7 @@
     <Content Include="Views\Comentarios\Index.cshtml" />
     <Content Include="Views\Manage\EditProfessor.cshtml" />
     <Content Include="Views\Professores\Index.cshtml" />
+    <Content Include="Views\Comentarios\ConteudoImproprio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

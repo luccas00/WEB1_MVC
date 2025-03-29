@@ -26,6 +26,12 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Departamento)
                     </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Media)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AvaliacaoGeral)
+                    </th>
                     <th></th>
                 </tr>
 
@@ -43,6 +49,12 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Departamento)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Media)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AvaliacaoGeral)
                         </td>
                         <td>
                             @Html.ActionLink("Novo Comentario", "Create", "Comentarios", new { id = item.Codigo, tipo = "Disciplina" }, null)
