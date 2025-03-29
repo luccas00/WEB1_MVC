@@ -7,13 +7,13 @@ namespace LuccasCorpVX.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class Updates2 : IMigrationMetadata
+    public sealed partial class Updates : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Updates2));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Updates));
         
         string IMigrationMetadata.Id
         {
-            get { return "202503280324489_Updates2"; }
+            get { return "202503290431263_Updates"; }
         }
         
         string IMigrationMetadata.Source

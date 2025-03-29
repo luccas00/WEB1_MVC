@@ -43,5 +43,7 @@ namespace LuccasCorpVX.Models
 
         public string AvaliacaoGeral { get; set; }
 
+        public int TotalComentarios { get; set; }
+
     }
 }

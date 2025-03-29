@@ -295,17 +295,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202503280257205_Updates.cs" />
-    <Compile Include="Migrations\202503280257205_Updates.Designer.cs">
-      <DependentUpon>202503280257205_Updates.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202503280324489_Updates2.cs" />
-    <Compile Include="Migrations\202503280324489_Updates2.Designer.cs">
-      <DependentUpon>202503280324489_Updates2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202503280530189_Updates3.cs" />
-    <Compile Include="Migrations\202503280530189_Updates3.Designer.cs">
-      <DependentUpon>202503280530189_Updates3.cs</DependentUpon>
+    <Compile Include="Migrations\202503290431263_Updates.cs" />
+    <Compile Include="Migrations\202503290431263_Updates.Designer.cs">
+      <DependentUpon>202503290431263_Updates.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -470,14 +462,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202503280257205_Updates.resx">
-      <DependentUpon>202503280257205_Updates.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202503280324489_Updates2.resx">
-      <DependentUpon>202503280324489_Updates2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202503280530189_Updates3.resx">
-      <DependentUpon>202503280530189_Updates3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202503290431263_Updates.resx">
+      <DependentUpon>202503290431263_Updates.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

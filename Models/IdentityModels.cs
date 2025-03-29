@@ -2,8 +2,10 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Globalization;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -143,6 +145,98 @@ namespace LuccasCorpVX.Models
 
                 return null; // Caso o usuário não seja encontrado
             }
+
+        }
+
+        public async Task<string> GetAvaliacaoGeralProfessor(int Id)
+        {
+            List<Comentario> comentarios = await this.Comentarios.Where(c => c.Professor == Id).ToListAsync();
+
+            int countPositivo = 0;
+            int countNegativo = 0;
+            int countNeutro = 0;
+
+            foreach (Comentario comentario in comentarios)
+            {
+                if (comentario.Sentimento == "Positivo")
+                {
+                    countPositivo++;
+                }
+
+                if (comentario.Sentimento == "Negativo")
+                {
+                    countNegativo++;
+                }
+
+                if (comentario.Sentimento == "Neutro")
+                {
+                    countNeutro++;
+                }
+
+            }
+
+            if (countPositivo > countNegativo && countPositivo > countNeutro)
+            {
+                return "Positivo";
+            }
+
+            if (countNegativo > countPositivo && countNegativo > countNeutro)
+            {
+                return "Negativo";
+            }
+
+            if (countNeutro > countPositivo && countNeutro > countNegativo)
+            {
+                return "Neutro";
+            }
+
+            return "Neutro";
+
+        }
+
+        public async Task<string> GetAvaliacaoGeralDisciplina(int Codigo)
+        {
+            List<Comentario> comentarios = await this.Comentarios.Where(c => c.Disciplina == Codigo).ToListAsync();
+
+            int countPositivo = 0;
+            int countNegativo = 0;
+            int countNeutro = 0;
+
+            foreach (Comentario comentario in comentarios)
+            {
+                if (comentario.Sentimento == "Positivo")
+                {
+                    countPositivo++;
+                }
+
+                if (comentario.Sentimento == "Negativo")
+                {
+                    countNegativo++;
+                }
+
+                if (comentario.Sentimento == "Neutro")
+                {
+                    countNeutro++;
+                }
+
+            }
+
+            if (countPositivo > countNegativo && countPositivo > countNeutro)
+            {
+                return "Positivo";
+            }
+
+            if (countNegativo > countPositivo && countNegativo > countNeutro)
+            {
+                return "Negativo";
+            }
+
+            if (countNeutro > countPositivo && countNeutro > countNegativo)
+            {
+                return "Neutro";
+            }
+
+            return "Neutro";
 
         }
 

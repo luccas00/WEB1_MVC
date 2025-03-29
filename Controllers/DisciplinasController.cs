@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity;
 
 namespace LuccasCorpVX.Controllers
 {
+    [Authorize]
     public class DisciplinasController : Controller
     {
         private readonly ApplicationDbContext _context;

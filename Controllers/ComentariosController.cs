@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity;
 
 namespace LuccasCorpVX.Controllers
 {
+    [Authorize]
     public class ComentariosController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -21,7 +22,7 @@ namespace LuccasCorpVX.Controllers
             _context = new ApplicationDbContext();
         }
 
-        [Authorize]
+        
         public async Task<ActionResult> Index()
         {
             var userId = User.Identity.GetUserId();
@@ -29,12 +30,31 @@ namespace LuccasCorpVX.Controllers
 
             ViewBag.FullName = fullName;
 
-            return View(_context.Comentarios.ToList());
+            List<Comentario> comentarios = new List<Comentario>();
+
+            if (User.Identity.GetUserName() == "professor@ufop.edu.br")
+            {
+
+                comentarios = _context.Comentarios.ToList();
+                return View(comentarios);
+
+            } else {
+
+                comentarios = _context.Comentarios.Where(c => c.Autor == User.Identity.Name).ToList();
+
+            }
+
+            return View(comentarios);
         }
 
         // GET: Comentarios/Details/5
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
+            var userId = User.Identity.GetUserId();
+            var fullName = await ApplicationDbContext.GetFullNameAsync(userId);
+
+            ViewBag.FullName = fullName;
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -50,6 +70,11 @@ namespace LuccasCorpVX.Controllers
         // GET: Comentarios/Create
         public async Task<ActionResult> Create(int? id, string tipo)
         {
+            var userId = User.Identity.GetUserId();
+            var fullName = await ApplicationDbContext.GetFullNameAsync(userId);
+
+            ViewBag.FullName = fullName;
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -69,7 +94,7 @@ namespace LuccasCorpVX.Controllers
             }
             else
             {
-                Professores professor = _context.Professores.Find(id);
+                Professores professor = _context.Professores.Find(id.ToString());
                 professorString = professor.FirstName + " " + professor.LastName;
                 if (professor == null)
                 {
@@ -98,17 +123,47 @@ namespace LuccasCorpVX.Controllers
         // obter mais detalhes, veja https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Comentario comentario)
+        public async Task<ActionResult> Create(Comentario comentario)
         {
             _context.Comentarios.Add(comentario);
             _context.SaveChanges();
+
+            if (comentario.DisciplinaNome != null)
+            {
+                Disciplinas disciplinas = _context.Disciplinas.FirstOrDefault(d => d.Codigo == comentario.Disciplina);
+                if (disciplinas != null)
+                {
+                    disciplinas.TotalComentarios++;
+                    disciplinas.Media = (disciplinas.Media + comentario.Positivo) / disciplinas.TotalComentarios;
+                    disciplinas.AvaliacaoGeral = await _context.GetAvaliacaoGeralDisciplina(comentario.Disciplina);
+                    _context.SaveChanges();
+                }
+            }
+            else
+            {
+                Professores professores = _context.Professores.FirstOrDefault(p => p.Id == comentario.Professor.ToString());
+                if (professores != null)
+                {
+                    professores.TotalComentarios++;
+                    professores.Media = (professores.Media + comentario.Positivo) / professores.TotalComentarios;
+                    professores.AvaliacaoGeral = await _context.GetAvaliacaoGeralProfessor(comentario.Professor);
+                    _context.SaveChanges();
+                }
+            }
+
             return RedirectToAction("Index");
 
         }
 
         // GET: Comentarios/Delete/5
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
+
+            var userId = User.Identity.GetUserId();
+            var fullName = await ApplicationDbContext.GetFullNameAsync(userId);
+
+            ViewBag.FullName = fullName;
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

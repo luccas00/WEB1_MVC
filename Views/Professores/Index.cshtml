@@ -51,7 +51,7 @@
                             @Html.DisplayFor(modelItem => item.AvaliacaoGeral)
                         </td>
                         <td>
-                            @Html.ActionLink("Criar Comentario", "Edit", new { id = item.Id })
+                            @Html.ActionLink("Novo Comentario", "Create", "Comentarios", new { id = item.Id, tipo = "Professores" }, null)
                         </td>
                     </tr>
                 }

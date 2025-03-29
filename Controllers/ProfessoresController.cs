@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace LuccasCorpVX.Controllers
 {
+    [Authorize]
     public class ProfessoresController : Controller
     {
         private readonly ApplicationDbContext _context;

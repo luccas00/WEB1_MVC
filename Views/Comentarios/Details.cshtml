@@ -1,118 +1,122 @@
 ﻿@model LuccasCorpVX.Models.Comentario
 
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
-</head>
-<body>
-    <div>
-        <h4>Comentario</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Titulo)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Titulo)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Descricao)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Descricao)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Autor)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Autor)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Professor)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Professor)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Disciplina)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Disciplina)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.CreatedOn)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.CreatedOn)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Sentimento)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Sentimento)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Positivo)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Positivo)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Negativo)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Negativo)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Neutro)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Neutro)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Insulto)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Insulto)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Ativo)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Ativo)
-            </dd>
-    
-        </dl>
+<main aria-labelledby="title" class="container mt-5">
+    <!-- Coluna da Imagem -->
+    <div class="row mb-4">
+        <div class="col-12 d-flex justify-content-center align-items-center bg-custom-blue" style="height: 150px;">
+            <img src="~/Images/logo_ufop_horizontal.png" alt="Logo UFOP" class="img-fluid rounded" style="max-width: 80%; height: auto;" />
+        </div>
     </div>
-    <p>
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-</body>
-</html>
+
+    <div>
+        <h6>
+            <br />
+            Este site utiliza inteligência artificial para filtrar automaticamente conteúdos ofensivos, incluindo insultos e preconceitos.
+            <br />
+            Nosso objetivo é criar um espaço respeitoso e seguro para todos. Caso encontre algum problema, entre em contato conosco.
+        </h6>
+    </div>
+
+    <!-- Detalhes do comentário com o mesmo estilo de criação -->
+    <div class="form bg-light p-4 rounded mt-4">
+        <h4>Detalhes do Comentário</h4>
+        <hr />
+
+        <!-- Título -->
+        <div class="form-group mb-3">
+            @Html.LabelFor(model => model.Titulo, htmlAttributes: new { @class = "col-form-label" })
+            <div class="col-12">
+                <div class="form-control rounded-pill shadow-sm w-100" style="border: none; background: transparent;">
+                    @Html.DisplayFor(model => model.Titulo)
+                </div>
+            </div>
+        </div>
+
+        <!-- Descrição -->
+        <div class="form-group mb-3">
+            @Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "col-form-label" })
+            <div class="col-12">
+                <div class="form-control mytextarea rounded-3 shadow-sm w-100" style="border: none; background: transparent;" rows="12">
+                    @Html.DisplayFor(model => model.Descricao)
+                </div>
+            </div>
+        </div>
+
+        <!-- Autor e Disciplina/Professor -->
+        <div class="form-group mb-3 row">
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.Autor, htmlAttributes: new { @class = "col-form-label" })
+                <div class="form-control rounded-pill shadow-sm w-100" style="border: none; background: transparent;">
+                    @Html.DisplayFor(model => model.Autor)
+                </div>
+            </div>
+
+            @if (Model.Disciplina != 0)
+            {
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Disciplina, htmlAttributes: new { @class = "col-form-label" })
+                    <div class="form-control rounded-pill shadow-sm w-100" style="border: none; background: transparent;">
+                        @Html.DisplayFor(model => model.DisciplinaNome)
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Professor, htmlAttributes: new { @class = "col-form-label" })
+                    <div class="form-control rounded-pill shadow-sm w-100" style="border: none; background: transparent;">
+                        @Html.DisplayFor(model => model.ProfessorNome)
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Sentimento e Data de Criação -->
+        <div class="form-group mb-3 row">
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.Sentimento, htmlAttributes: new { @class = "col-form-label" })
+                <div class="form-control rounded-pill shadow-sm w-100" style="border: none; background: transparent;">
+                    @Html.DisplayFor(model => model.Sentimento)
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.CreatedOn, htmlAttributes: new { @class = "col-form-label" })
+                <div class="form-control rounded-pill shadow-sm w-100" style="border: none; background: transparent;">
+                    @Html.DisplayFor(model => model.CreatedOn)
+                </div>
+            </div>
+        </div>
+
+        <!-- Sentimentos Positivos, Negativos e Neutros -->
+        <div class="form-group mb-3 row">
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.Positivo, htmlAttributes: new { @class = "col-form-label" })
+                <div class="form-control rounded-pill shadow-sm w-100" style="border: none; background: transparent;">
+                    @Html.DisplayFor(model => model.Positivo)
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.Negativo, htmlAttributes: new { @class = "col-form-label" })
+                <div class="form-control rounded-pill shadow-sm w-100" style="border: none; background: transparent;">
+                    @Html.DisplayFor(model => model.Negativo)
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.Negativo, htmlAttributes: new { @class = "col-form-label" })
+                <div class="form-control rounded-pill shadow-sm w-100" style="border: none; background: transparent;">
+                    @Html.DisplayFor(model => model.Negativo)
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="mt-4">
+        <!-- Botão de Delete, com estilo do Bootstrap -->
+        @Html.ActionLink("Excluir", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
+    </div>
+
+</main>
