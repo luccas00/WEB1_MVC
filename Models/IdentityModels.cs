@@ -148,96 +148,32 @@ namespace LuccasCorpVX.Models
 
         }
 
-        public async Task<string> GetAvaliacaoGeralProfessor(int Id)
-        {
-            List<Comentario> comentarios = await this.Comentarios.Where(c => c.Professor == Id).ToListAsync();
-
-            int countPositivo = 0;
-            int countNegativo = 0;
-            int countNeutro = 0;
-
-            foreach (Comentario comentario in comentarios)
-            {
-                if (comentario.Sentimento == "Positivo")
-                {
-                    countPositivo++;
-                }
-
-                if (comentario.Sentimento == "Negativo")
-                {
-                    countNegativo++;
-                }
-
-                if (comentario.Sentimento == "Neutro")
-                {
-                    countNeutro++;
-                }
-
-            }
-
-            if (countPositivo > countNegativo && countPositivo > countNeutro)
-            {
-                return "Positivo";
-            }
-
-            if (countNegativo > countPositivo && countNegativo > countNeutro)
-            {
-                return "Negativo";
-            }
-
-            if (countNeutro > countPositivo && countNeutro > countNegativo)
-            {
-                return "Neutro";
-            }
-
-            return "Neutro";
-
-        }
-
         public async Task<string> GetAvaliacaoGeralDisciplina(int Codigo)
         {
-            List<Comentario> comentarios = await this.Comentarios.Where(c => c.Disciplina == Codigo).ToListAsync();
+            var comentarios = await this.Comentarios.Where(c => c.Disciplina == Codigo).ToListAsync();
+            if (!comentarios.Any()) return "Neutro";
 
-            int countPositivo = 0;
-            int countNegativo = 0;
-            int countNeutro = 0;
+            var sentimentoFrequencia = comentarios
+                .GroupBy(c => c.Sentimento)
+                .Select(g => new { Sentimento = g.Key, Quantidade = g.Count() })
+                .OrderByDescending(g => g.Quantidade)
+                .FirstOrDefault();
 
-            foreach (Comentario comentario in comentarios)
-            {
-                if (comentario.Sentimento == "Positivo")
-                {
-                    countPositivo++;
-                }
+            return sentimentoFrequencia?.Sentimento ?? "Neutro";
+        }
 
-                if (comentario.Sentimento == "Negativo")
-                {
-                    countNegativo++;
-                }
+        public async Task<string> GetAvaliacaoGeralProfessor(int id)
+        {
+            var comentarios = await this.Comentarios.Where(c => c.Professor == id).ToListAsync();
+            if (!comentarios.Any()) return "Neutro";
 
-                if (comentario.Sentimento == "Neutro")
-                {
-                    countNeutro++;
-                }
+            var sentimentoFrequencia = comentarios
+                .GroupBy(c => c.Sentimento)
+                .Select(g => new { Sentimento = g.Key, Quantidade = g.Count() })
+                .OrderByDescending(g => g.Quantidade)
+                .FirstOrDefault();
 
-            }
-
-            if (countPositivo > countNegativo && countPositivo > countNeutro)
-            {
-                return "Positivo";
-            }
-
-            if (countNegativo > countPositivo && countNegativo > countNeutro)
-            {
-                return "Negativo";
-            }
-
-            if (countNeutro > countPositivo && countNeutro > countNegativo)
-            {
-                return "Neutro";
-            }
-
-            return "Neutro";
-
+            return sentimentoFrequencia?.Sentimento ?? "Neutro";
         }
 
         public System.Data.Entity.DbSet<LuccasCorpVX.Models.Disciplinas> Disciplinas { get; set; }

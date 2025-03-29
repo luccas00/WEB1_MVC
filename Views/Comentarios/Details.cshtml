@@ -93,21 +93,24 @@
             <div class="col-md-4">
                 @Html.LabelFor(model => model.Positivo, htmlAttributes: new { @class = "col-form-label" })
                 <div class="form-control rounded-pill shadow-sm w-100" style="border: none; background: transparent;">
-                    @Html.DisplayFor(model => model.Positivo)
+                    @*@Html.DisplayFor(model => model.Positivo)*@
+                    @(Model.Positivo.ToString("P0"))
                 </div>
             </div>
 
             <div class="col-md-4">
                 @Html.LabelFor(model => model.Negativo, htmlAttributes: new { @class = "col-form-label" })
                 <div class="form-control rounded-pill shadow-sm w-100" style="border: none; background: transparent;">
-                    @Html.DisplayFor(model => model.Negativo)
+                    @*@Html.DisplayFor(model => model.Negativo)*@
+                    @(Model.Negativo.ToString("P0"))
                 </div>
             </div>
 
             <div class="col-md-4">
-                @Html.LabelFor(model => model.Negativo, htmlAttributes: new { @class = "col-form-label" })
+                @Html.LabelFor(model => model.Neutro, htmlAttributes: new { @class = "col-form-label" })
                 <div class="form-control rounded-pill shadow-sm w-100" style="border: none; background: transparent;">
-                    @Html.DisplayFor(model => model.Negativo)
+                    @*@Html.DisplayFor(model => model.Neutro)*@
+                    @(Model.Neutro.ToString("P0"))
                 </div>
             </div>
         </div>

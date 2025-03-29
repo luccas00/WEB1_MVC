@@ -96,3 +96,24 @@ where Id = '058ccae5-dedf-4a8b-b96e-f23781dc2336'
 update Professores
 set TotalComentarios = 0
 where id = 0
+
+select * from Comentarios
+
+update Comentarios
+set Ativo = 1
+
+update Professores
+set Media = 0,
+AvaliacaoGeral = '',
+TotalComentarios = 0
+
+
+update Disciplinas
+set Media = 0,
+AvaliacaoGeral = '',
+TotalComentarios = 0
+
+delete from Comentarios
+
+select * from Disciplinas
+

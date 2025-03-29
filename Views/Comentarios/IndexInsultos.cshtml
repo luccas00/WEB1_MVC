@@ -9,18 +9,6 @@
         </div>
     </div>
 
-    @if (ViewBag.User == "professor@ufop.edu.br")
-    {
-        <div class="row mb-4">
-            <div class="d-flex justify-content-end">
-                <a href="@Url.Action("IndexInsultos", "Comentarios")" class="btn rounded-pill shadow-sm px-3 py-2 fs-6 custom-btn text-black">
-                    Verificar Lista de Insultos
-                </a>
-            </div>
-        </div>
-
-    }
-
     <!-- Tabela de Disciplinas -->
     <div class="row">
         <div class="col-12 bg-light d-flex flex-column">
@@ -87,32 +75,8 @@
                             @Html.DisplayFor(modelItem => item.CreatedOn)
                         </td>
                         <td>
-                            @{
-                                string sentimentoDisplay = "";
-
-                                if (item.Sentimento == "Positive")
-                                {
-                                    sentimentoDisplay = "Positivo";
-                                }
-                                else if (item.Sentimento == "Negative")
-                                {
-                                    sentimentoDisplay = "Negativo";
-                                }
-                                else if (item.Sentimento == "Neutral")
-                                {
-                                    sentimentoDisplay = "Neutro";
-                                }
-                                else
-                                {
-                                    sentimentoDisplay = item.Sentimento; // Se o valor não for "Positive", "Negative" ou "Neutral", exibe o valor original
-                                }
-                            }
-                            @sentimentoDisplay
-                        </td>
-                        @*<td>
-
                             @Html.DisplayFor(modelItem => item.Sentimento)
-                        </td>*@
+                        </td>
                         <td>
                             @(item.Positivo.ToString("P0"))
                             @*@Html.DisplayFor(modelItem => item.Positivo)*@

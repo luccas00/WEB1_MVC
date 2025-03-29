@@ -51,11 +51,35 @@
                             @Html.DisplayFor(modelItem => item.Departamento)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Media)
+                            @*@Html.DisplayFor(modelItem => item.Media)*@
+                            @(item.Media.ToString("P0"))
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.AvaliacaoGeral)
+                            @{
+                                string sentimentoDisplay = "";
+
+                                if (item.AvaliacaoGeral == "Positive")
+                                {
+                                    sentimentoDisplay = "Positivo";
+                                }
+                                else if (item.AvaliacaoGeral == "Negative")
+                                {
+                                    sentimentoDisplay = "Negativo";
+                                }
+                                else if (item.AvaliacaoGeral == "Neutral")
+                                {
+                                    sentimentoDisplay = "Neutro";
+                                }
+                                else
+                                {
+                                    sentimentoDisplay = item.AvaliacaoGeral; // Se o valor não for "Positive", "Negative" ou "Neutral", exibe o valor original
+                                }
+                            }
+                            @sentimentoDisplay
                         </td>
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.AvaliacaoGeral)
+                        </td>*@
                         <td>
                             @Html.ActionLink("Novo Comentario", "Create", "Comentarios", new { id = item.Codigo, tipo = "Disciplina" }, null)
                         </td>

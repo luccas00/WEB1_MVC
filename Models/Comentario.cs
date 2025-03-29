@@ -40,6 +40,6 @@ namespace LuccasCorpVX.Models
         public double Negativo { get; set; }
         public double Neutro { get; set; }
         public bool Insulto { get; set; }
-        public bool Ativo { get; set; }
+        public bool Ativo { get; set; } = true; // Comentário ativo
     }
 }
