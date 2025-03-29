@@ -92,3 +92,7 @@ select * from AspNetUsers
 update AspNetUsers
 set EmailConfirmed = 1
 where Id = '058ccae5-dedf-4a8b-b96e-f23781dc2336'
+
+update Professores
+set TotalComentarios = 0
+where id = 0
