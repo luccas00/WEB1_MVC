@@ -93,6 +93,7 @@ namespace LuccasCorpVX.Controllers
             ViewBag.Tipo = await _context.GetTipoAsync(userId);
 
             ViewBag.FullName = fullName;
+            ViewBag.Tipo = await _context.GetTipoAsync(userId);
 
             if (id == null)
             {
@@ -272,6 +273,8 @@ namespace LuccasCorpVX.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(Comentario comentario)
         {
+            ViewBag.Tipo = await _context.GetTipoAsync(User.Identity.GetUserId());
+
             JsonResult result = await CheckForInsults(comentario.Descricao);
 
             // Inspecione o resultado do JSON
@@ -339,6 +342,7 @@ namespace LuccasCorpVX.Controllers
         [ValidateAntiForgeryToken]
         public async Task UpdateMetrics(Comentario comentario)
         {
+
             if (comentario.DisciplinaNome != null)
             {
                 var disciplina = _context.Disciplinas.FirstOrDefault(d => d.Codigo == comentario.Disciplina);

@@ -115,5 +115,14 @@ TotalComentarios = 0
 
 delete from Comentarios
 
+select * from Professores
+
 select * from Disciplinas
 
+select * from Comentarios
+
+update Professores
+set Id = 999
+where Id = 0
+
+select * from AspNetUsers

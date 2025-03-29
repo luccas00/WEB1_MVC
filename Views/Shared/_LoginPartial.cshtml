@@ -18,7 +18,7 @@
             <li>
                 @Html.ActionLink("Comentarios", "Index", "Comentarios", routeValues: null, htmlAttributes: new { title = "Comentarios", @class = "nav-link" })
             </li>
-            @if (ViewBag.Tipo.Equals("Aluno"))
+            @if (User.Identity.Name.Contains("aluno"))
             {
                 <li>
                     @Html.ActionLink("Olá " + (string)ViewBag.FullName + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "nav-link" })
