@@ -34,6 +34,7 @@ namespace LuccasCorpVX.Controllers
             var fullName = await ApplicationDbContext.GetFullNameAsync(userId);
 
             ViewBag.FullName = fullName;
+            ViewBag.Tipo = await _context.GetTipoAsync(userId);
 
             List<Comentario> comentarios = new List<Comentario>();
             ViewBag.User = User.Identity.GetUserName();
@@ -63,6 +64,7 @@ namespace LuccasCorpVX.Controllers
             var fullName = await ApplicationDbContext.GetFullNameAsync(userId);
 
             ViewBag.FullName = fullName;
+            ViewBag.Tipo = await _context.GetTipoAsync(userId);
 
             List<Comentario> comentarios = new List<Comentario>();
 
@@ -88,6 +90,7 @@ namespace LuccasCorpVX.Controllers
         {
             var userId = User.Identity.GetUserId();
             var fullName = await ApplicationDbContext.GetFullNameAsync(userId);
+            ViewBag.Tipo = await _context.GetTipoAsync(userId);
 
             ViewBag.FullName = fullName;
 
@@ -110,6 +113,7 @@ namespace LuccasCorpVX.Controllers
             var fullName = await ApplicationDbContext.GetFullNameAsync(userId);
 
             ViewBag.FullName = fullName;
+            ViewBag.Tipo = await _context.GetTipoAsync(userId);
 
             if (id == null)
             {
@@ -383,6 +387,7 @@ namespace LuccasCorpVX.Controllers
             var fullName = await ApplicationDbContext.GetFullNameAsync(userId);
 
             ViewBag.FullName = fullName;
+            ViewBag.Tipo = await _context.GetTipoAsync(userId);
 
             if (id == null)
             {

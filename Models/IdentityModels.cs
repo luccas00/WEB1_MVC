@@ -35,6 +35,7 @@ namespace LuccasCorpVX.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+
         public ApplicationDbContext()
             : base("DatabaseConnection", throwIfV1Schema: false)
         {

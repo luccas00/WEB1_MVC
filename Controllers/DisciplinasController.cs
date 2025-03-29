@@ -29,6 +29,7 @@ namespace LuccasCorpVX.Controllers
             var fullName = await ApplicationDbContext.GetFullNameAsync(userId);
 
             ViewBag.FullName = fullName;
+            ViewBag.Tipo = await _context.GetTipoAsync(userId);
 
             return View(_context.Disciplinas.ToList());
         }

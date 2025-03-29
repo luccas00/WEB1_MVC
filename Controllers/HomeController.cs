@@ -20,6 +20,7 @@ namespace LuccasCorpVX.Controllers
             var fullName = await ApplicationDbContext.GetFullNameAsync(userId);
 
             ViewBag.FullName = fullName;
+            ViewBag.Tipo = await _context.GetTipoAsync(userId);
 
             return View();
         }
@@ -30,6 +31,7 @@ namespace LuccasCorpVX.Controllers
             var fullName = await ApplicationDbContext.GetFullNameAsync(userId);
 
             ViewBag.FullName = fullName;
+            ViewBag.Tipo = await _context.GetTipoAsync(userId);
             ViewBag.Message = "Your application description page.";
 
             return View();
@@ -41,6 +43,7 @@ namespace LuccasCorpVX.Controllers
             var fullName = await ApplicationDbContext.GetFullNameAsync(userId);
 
             ViewBag.FullName = fullName;
+            ViewBag.Tipo = await _context.GetTipoAsync(userId);
             ViewBag.Message = "Your contact page.";
 
             return View();
@@ -52,6 +55,7 @@ namespace LuccasCorpVX.Controllers
             var fullName = await ApplicationDbContext.GetFullNameAsync(userId);
 
             ViewBag.FullName = fullName;
+            ViewBag.Tipo = await _context.GetTipoAsync(userId);
             ViewBag.Message = "Your contact page.";
 
             return View();

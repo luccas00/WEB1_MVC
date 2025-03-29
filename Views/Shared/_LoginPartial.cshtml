@@ -1,4 +1,7 @@
 ﻿@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.EntityFramework
+@using LuccasCorpVX.Models
+
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -15,7 +18,7 @@
             <li>
                 @Html.ActionLink("Comentarios", "Index", "Comentarios", routeValues: null, htmlAttributes: new { title = "Comentarios", @class = "nav-link" })
             </li>
-            @if (ViewBag.Tipo == "Aluno")
+            @if (ViewBag.Tipo.Equals("Aluno"))
             {
                 <li>
                     @Html.ActionLink("Olá " + (string)ViewBag.FullName + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "nav-link" })

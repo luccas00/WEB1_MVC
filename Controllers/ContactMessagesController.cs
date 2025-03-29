@@ -22,7 +22,7 @@ namespace LuccasCorpVX.Controllers
 {
     public class ContactMessagesController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationDbContext _context = new ApplicationDbContext();
 
 
         public async Task<ActionResult> Index()
@@ -31,6 +31,7 @@ namespace LuccasCorpVX.Controllers
             var fullName = await ApplicationDbContext.GetFullNameAsync(userId);
 
             ViewBag.FullName = fullName;
+            ViewBag.Tipo = await _context.GetTipoAsync(userId);
 
             return View();
         }
@@ -41,6 +42,7 @@ namespace LuccasCorpVX.Controllers
             var fullName = await ApplicationDbContext.GetFullNameAsync(userId);
 
             ViewBag.FullName = fullName;
+            ViewBag.Tipo = await _context.GetTipoAsync(userId);
 
             return View();
         }
@@ -51,6 +53,7 @@ namespace LuccasCorpVX.Controllers
             var fullName = await ApplicationDbContext.GetFullNameAsync(userId);
 
             ViewBag.FullName = fullName;
+            ViewBag.Tipo = await _context.GetTipoAsync(userId);
 
             return View();
         }
@@ -112,8 +115,8 @@ namespace LuccasCorpVX.Controllers
 
                     contactMessage.CreatedOn = DateTime.Now;
                     contactMessage.Insulto = true;
-                    db.ContactMessages.Add(contactMessage);
-                    db.SaveChanges();
+                    _context.ContactMessages.Add(contactMessage);
+                    _context.SaveChanges();
 
                     ViewBag.Message = "A mensagem contém conteúdo impróprio, incluindo insultos, preconceitos ou julgamentos.";
                     ViewBag.Texto = dataString;
@@ -133,102 +136,13 @@ namespace LuccasCorpVX.Controllers
 
                 contactMessage.CreatedOn = DateTime.Now;
                 contactMessage.Insulto = false;
-                db.ContactMessages.Add(contactMessage);
-                db.SaveChanges();
+                _context.ContactMessages.Add(contactMessage);
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             return View(contactMessage);
         }
-
-        // POST: ContactMessages/Create
-        // Para se proteger de mais ataques, habilite as propriedades específicas às quais você quer se associar. Para 
-        // obter mais detalhes, veja https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> Create([Bind(Include = "Id,Name,Email,Message,DateSent")] ContactMessage contactMessage)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        JsonResult result = await CheckForInsults(contactMessage.Message);
-
-        //        // Inspecione o resultado do JSON
-        //        //dynamic jsonData = result.Data;
-        //        //var test = result.Data;
-        //        bool flagInsulto = false;
-        //        bool flagPreconceito = false;
-        //        bool flagJulgamento = false;
-
-        //        if (result.Data is JsonElement jsonElement1 && jsonElement1.TryGetProperty("tem_insultos", out JsonElement temInsultosElement) && temInsultosElement.GetBoolean())
-        //        {
-        //            flagInsulto = true;
-        //        }
-
-        //        if (result.Data is JsonElement jsonElement2 && jsonElement2.TryGetProperty("tem_preconceitos", out JsonElement temPreconceitosElement) && temPreconceitosElement.GetBoolean())
-        //        {
-        //            flagPreconceito = true;
-        //        }
-
-        //        if (result.Data is JsonElement jsonElement3 && jsonElement3.TryGetProperty("tem_julgamentos", out JsonElement temJulgamentosElement) && temJulgamentosElement.GetBoolean())
-        //        {
-        //            flagJulgamento = true;
-        //        }
-
-        //        if (result.Data is JsonElement jsonElement4 && jsonElement4.TryGetProperty("flags", out JsonElement temFlagsElement) && temFlagsElement.ValueKind == JsonValueKind.Array && temFlagsElement.GetArrayLength() <= 0)
-        //        {
-        //            flagJulgamento = false;
-        //        }
-
-
-        //        var dataString = result.Data.ToString();
-        //        // var data = JsonSerializer.Deserialize<Dictionary<string, object>>(dataString);
-        //        //var temInsultos = data["tem_insultos"];
-        //        //var insultos = data["flags"];
-        //        //var texto = data["texto"];
-
-        //        ContactMessage aux = null;
-
-        //        if (flagInsulto || flagPreconceito || flagJulgamento)
-        //        {
-        //            aux = await SentimentAnalysis(contactMessage.Message);
-        //            if (aux != null)
-        //            {
-        //                contactMessage.Sentimento = aux.Sentimento;
-        //                contactMessage.Positivo = aux.Positivo;
-        //                contactMessage.Negativo = aux.Negativo;
-        //                contactMessage.Neutro = aux.Neutro;
-        //            }
-
-        //            contactMessage.CreatedOn = DateTime.Now;
-        //            contactMessage.Insulto = true;
-        //            db.ContactMessages.Add(contactMessage);
-        //            db.SaveChanges();
-
-        //            ViewBag.Message = "A mensagem contém conteúdo impróprio, incluindo insultos, preconceitos ou julgamentos.";
-        //            ViewBag.Texto = dataString;
-        //            return View("ConteudoImproprio");
-        //        } 
-        //        else
-        //        {
-        //            aux = await SentimentAnalysis(contactMessage.Message);
-        //            if (aux != null)
-        //            {
-        //                contactMessage.Sentimento = aux.Sentimento;
-        //                contactMessage.Positivo = aux.Positivo;
-        //                contactMessage.Negativo = aux.Negativo;
-        //                contactMessage.Neutro = aux.Neutro;
-        //            }
-        //        }
-                
-        //        contactMessage.CreatedOn = DateTime.Now;
-        //        contactMessage.Insulto = false;
-        //        db.ContactMessages.Add(contactMessage);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    return View(contactMessage);
-        //}
 
         public static async Task<JsonResult> CheckForInsults(string message)
         {
@@ -343,7 +257,7 @@ namespace LuccasCorpVX.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _context.Dispose();
             }
             base.Dispose(disposing);
         }
