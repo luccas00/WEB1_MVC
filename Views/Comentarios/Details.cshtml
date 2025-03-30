@@ -51,7 +51,7 @@
                 </div>
             </div>
 
-            @if (!Model.DisciplinaNome.Equals(null))
+            @if (Model.DisciplinaNome != null)
             {
                 <div class="col-md-6">
                     @Html.LabelFor(model => model.Disciplina, htmlAttributes: new { @class = "col-form-label" })

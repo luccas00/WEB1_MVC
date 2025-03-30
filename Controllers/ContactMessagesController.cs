@@ -31,6 +31,7 @@ namespace LuccasCorpVX.Controllers
             var fullName = await ApplicationDbContext.GetFullNameAsync(userId);
 
             ViewBag.FullName = fullName;
+            ViewBag.AutorEmail = User.Identity.GetUserName();
             ViewBag.Tipo = await _context.GetTipoAsync(userId);
 
             return View();
@@ -42,6 +43,7 @@ namespace LuccasCorpVX.Controllers
             var fullName = await ApplicationDbContext.GetFullNameAsync(userId);
 
             ViewBag.FullName = fullName;
+            ViewBag.AutorEmail = User.Identity.GetUserName();
             ViewBag.Tipo = await _context.GetTipoAsync(userId);
 
             return View();
@@ -54,6 +56,7 @@ namespace LuccasCorpVX.Controllers
 
             ViewBag.FullName = fullName;
             ViewBag.Tipo = await _context.GetTipoAsync(userId);
+            ViewBag.AutorEmail = User.Identity.GetUserName();
 
             return View();
         }
@@ -62,26 +65,32 @@ namespace LuccasCorpVX.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "Id,Name,Email,Message,DateSent")] ContactMessage contactMessage)
         {
+            var fullName = await ApplicationDbContext.GetFullNameAsync(User.Identity.GetUserId());
+
+            ViewBag.FullName = fullName;
+
+            ViewBag.AutorEmail = User.Identity.GetUserName();
+
             if (ModelState.IsValid)
             {
-                JsonResult result = await CheckForInsults(contactMessage.Message);
+                //JsonResult result = await CheckForInsults(contactMessage.Message);
 
                 // Inspecione o resultado do JSON
                 //dynamic jsonData = result.Data;
                 //var test = result.Data;
-                bool flagInsulto = false;
-                bool flagPreconceito = false;
+                //bool flagInsulto = false;
+                //bool flagPreconceito = false;
                 //bool flagJulgamento = false;
 
-                if (result.Data is JsonElement jsonElement1 && jsonElement1.TryGetProperty("tem_insultos", out JsonElement temInsultosElement) && temInsultosElement.GetBoolean())
-                {
-                    flagInsulto = true;
-                }
+                //if (result.Data is JsonElement jsonElement1 && jsonElement1.TryGetProperty("tem_insultos", out JsonElement temInsultosElement) && temInsultosElement.GetBoolean())
+                //{
+                //    flagInsulto = true;
+                //}
 
-                if (result.Data is JsonElement jsonElement2 && jsonElement2.TryGetProperty("tem_preconceitos", out JsonElement temPreconceitosElement) && temPreconceitosElement.GetBoolean())
-                {
-                    flagPreconceito = true;
-                }
+                //if (result.Data is JsonElement jsonElement2 && jsonElement2.TryGetProperty("tem_preconceitos", out JsonElement temPreconceitosElement) && temPreconceitosElement.GetBoolean())
+                //{
+                //    flagPreconceito = true;
+                //}
 
                 //if (result.Data is JsonElement jsonElement3 && jsonElement3.TryGetProperty("tem_julgamentos", out JsonElement temJulgamentosElement) && temJulgamentosElement.GetBoolean())
                 //{
@@ -94,48 +103,48 @@ namespace LuccasCorpVX.Controllers
                 //}
 
 
-                var dataString = result.Data.ToString();
-                // var data = JsonSerializer.Deserialize<Dictionary<string, object>>(dataString);
-                //var temInsultos = data["tem_insultos"];
-                //var insultos = data["flags"];
-                //var texto = data["texto"];
+                //var dataString = result.Data.ToString();
+                //// var data = JsonSerializer.Deserialize<Dictionary<string, object>>(dataString);
+                ////var temInsultos = data["tem_insultos"];
+                ////var insultos = data["flags"];
+                ////var texto = data["texto"];
 
-                ContactMessage aux = null;
+                //ContactMessage aux = null;
 
-                if (flagInsulto || flagPreconceito)
-                {
-                    aux = await SentimentAnalysis(contactMessage.Message);
-                    if (aux != null)
-                    {
-                        contactMessage.Sentimento = aux.Sentimento;
-                        contactMessage.Positivo = aux.Positivo;
-                        contactMessage.Negativo = aux.Negativo;
-                        contactMessage.Neutro = aux.Neutro;
-                    }
+                //if (flagInsulto || flagPreconceito)
+                //{
+                //    aux = await SentimentAnalysis(contactMessage.Message);
+                //    if (aux != null)
+                //    {
+                //        contactMessage.Sentimento = aux.Sentimento;
+                //        contactMessage.Positivo = aux.Positivo;
+                //        contactMessage.Negativo = aux.Negativo;
+                //        contactMessage.Neutro = aux.Neutro;
+                //    }
 
-                    contactMessage.CreatedOn = DateTime.Now;
-                    contactMessage.Insulto = true;
-                    _context.ContactMessages.Add(contactMessage);
-                    _context.SaveChanges();
+                //    contactMessage.CreatedOn = DateTime.Now;
+                //    contactMessage.Insulto = true;
+                //    _context.ContactMessages.Add(contactMessage);
+                //    _context.SaveChanges();
 
-                    ViewBag.Message = "A mensagem contém conteúdo impróprio, incluindo insultos, preconceitos ou julgamentos.";
-                    ViewBag.Texto = dataString;
-                    return View("ConteudoImproprio");
-                }
-                else
-                {
-                    aux = await SentimentAnalysis(contactMessage.Message);
-                    if (aux != null)
-                    {
-                        contactMessage.Sentimento = aux.Sentimento;
-                        contactMessage.Positivo = aux.Positivo;
-                        contactMessage.Negativo = aux.Negativo;
-                        contactMessage.Neutro = aux.Neutro;
-                    }
-                }
+                //    ViewBag.Message = "A mensagem contém conteúdo impróprio, incluindo insultos, preconceitos ou julgamentos.";
+                //    ViewBag.Texto = dataString;
+                //    return View("ConteudoImproprio");
+                //}
+                //else
+                //{
+                //    aux = await SentimentAnalysis(contactMessage.Message);
+                //    if (aux != null)
+                //    {
+                //        contactMessage.Sentimento = aux.Sentimento;
+                //        contactMessage.Positivo = aux.Positivo;
+                //        contactMessage.Negativo = aux.Negativo;
+                //        contactMessage.Neutro = aux.Neutro;
+                //    }
+                //}
 
                 contactMessage.CreatedOn = DateTime.Now;
-                contactMessage.Insulto = false;
+                //contactMessage.Insulto = false;
                 _context.ContactMessages.Add(contactMessage);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
