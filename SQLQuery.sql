@@ -87,6 +87,10 @@ INSERT INTO Professores (Id, Email, FirstName, LastName, Campus, Departamento, C
 VALUES  
 ('0', 'professor@ufop.edu.br', 'Professor', 'Teste', 'UFOP', 'DECSI', GETDATE(), 1, 0, '')
 
+INSERT INTO Professores (Id, Email, FirstName, LastName, Campus, Departamento, CreatedOn, Ativo, Media, AvaliacaoGeral)  
+VALUES  
+('32', 'freddy.vicente@ufop.edu.br', 'Frddy Pablo', 'Castro Vicente', 'UFOP', 'DECEA', GETDATE(), 1, 0, '')
+
 select * from AspNetUsers
 
 update AspNetUsers
@@ -126,3 +130,5 @@ set Id = 999
 where Id = 0
 
 select * from AspNetUsers
+
+select * from ContactMessages
