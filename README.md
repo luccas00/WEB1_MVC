@@ -68,6 +68,7 @@
 ### 8. Tratamento de Erros
 
 Possível Erro: Banco de Dados Offline
+
 O site utiliza um banco de dados gratuito no Azure, o que significa que há uma configuração nativa que pausa automaticamente o banco de dados caso não haja acessos por um longo período. Se você visualizar a mensagem abaixo ao tentar acessar o site, aguarde de 30 a 60 segundos e atualize a página para tentar novamente. O banco de dados será iniciado automaticamente.
 
 ﻿![Diagrama de Classe DB Diagram](Images/ErroBDOffline.png)
