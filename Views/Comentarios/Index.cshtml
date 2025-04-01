@@ -1,6 +1,5 @@
 ﻿@model IEnumerable<LuccasCorpVX.Models.Comentario>
 
-
 <main aria-labelledby="title" class="container mt-5">
     <!-- Coluna da Imagem -->
     <div class="row mb-4">
@@ -18,122 +17,172 @@
                 </a>
             </div>
         </div>
-
     }
 
-    <!-- Tabela de Disciplinas -->
+    <!-- Filtros -->
+    <div class="row mb-3">
+        <div class="col-12 d-flex gap-3">
+            <!-- Caixa de pesquisa por Referente a -->
+            <input type="text" id="referenteSearch" class="form-control" placeholder="Pesquisar por Referente a..." />
+
+            <!-- Filtro por Sentimento -->
+            <select id="sentimentoFilter" class="form-select">
+                <option value="">Filtrar por Sentimento</option>
+                <option value="Positivo">Positivo</option>
+                <option value="Negativo">Negativo</option>
+                <option value="Neutr">Neutro</option>
+            </select>
+
+            <!-- Botão de Resetar Filtros -->
+            <button id="resetFilters" class="btn btn-secondary" disabled style="opacity: 0.5;">↻</button>
+        </div>
+    </div>
+
+    <!-- Tabela de Comentários -->
     <div class="row">
         <div class="col-12 bg-light d-flex flex-column">
             <table class="table">
-                <tr>
-                    <th>
-                        Título
-                    </th>
-                    <th>
-                        Descrição
-                    </th>
-                    <th>
-                        Referente a
-                    </th>
-                    @*<th>
-                            @Html.DisplayNameFor(model => model.Professor)
+                <thead>
+                    <tr>
+                        <th>
+                            Título
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Disciplina)
-                        </th>*@
-                    <th>
-                        Data de Criação
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Sentimento)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Positivo)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Negativo)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Neutro)
-                    </th>
-                </tr>
-
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Titulo)
-                        </td>
-                        <td style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                            @Html.DisplayFor(modelItem => item.Descricao)
-                        </td>
-                        <td>
-                            @if (!string.IsNullOrEmpty(item.ProfessorNome))
-                            {
-                                @Html.DisplayFor(modelItem => item.ProfessorNome)
-                            }
-                            else
-                            {
-                                @Html.DisplayFor(modelItem => item.DisciplinaNome)
-                            }
-                        </td>
-                        @*<td>
-                            @Html.DisplayFor(modelItem => item.Professor)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Disciplina)
-                        </td>*@
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CreatedOn)
-                        </td>
-                        <td>
-                            @{
-                                string sentimentoDisplay = "";
-
-                                if (item.Sentimento == "Positive")
+                            Descrição
+                        </th>
+                        <th>
+                            Referente a
+                        </th>
+                        <th>
+                            Data de Criação
+                        </th>
+                        <th>
+                            Sentimento
+                        </th>
+                        <th>
+                            Positivo
+                        </th>
+                        <th>
+                            Negativo
+                        </th>
+                        <th>
+                            Neutro
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="comentariosTable">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Titulo)</td>
+                            <td style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                @Html.DisplayFor(modelItem => item.Descricao)
+                            </td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(item.ProfessorNome))
                                 {
-                                    sentimentoDisplay = "Positivo";
-                                }
-                                else if (item.Sentimento == "Negative")
-                                {
-                                    sentimentoDisplay = "Negativo";
-                                }
-                                else if (item.Sentimento == "Neutral")
-                                {
-                                    sentimentoDisplay = "Neutro";
+                                    @Html.DisplayFor(modelItem => item.ProfessorNome)
                                 }
                                 else
                                 {
-                                    sentimentoDisplay = item.Sentimento; // Se o valor não for "Positive", "Negative" ou "Neutral", exibe o valor original
+                                    @Html.DisplayFor(modelItem => item.DisciplinaNome)
                                 }
-                            }
-                            @sentimentoDisplay
-                        </td>
-                        @*<td>
-
-                            @Html.DisplayFor(modelItem => item.Sentimento)
-                        </td>*@
-                        <td>
-                            @(item.Positivo.ToString("P0"))
-                            @*@Html.DisplayFor(modelItem => item.Positivo)*@
-                        </td>
-                        <td>
-                            @(item.Negativo.ToString("P0"))
-                            @*@Html.DisplayFor(modelItem => item.Negativo)*@
-                        </td>
-                        <td>
-                            @(item.Neutro.ToString("P0"))
-                            @*@Html.DisplayFor(modelItem => item.Neutro)*@
-                        </td>
-                        <td>
-                            @Html.ActionLink("Excluir", "Delete", new { id = item.Id }) |
-                            @Html.ActionLink("Detalhes", "Details", new { id = item.Id })
-                        </td>
-                    </tr>
-                }
-
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.CreatedOn)</td>
+                            <td>
+                                @{
+                                    string sentimentoDisplay = "";
+                                    if (item.Sentimento == "Positive")
+                                    {
+                                        sentimentoDisplay = "Positivo";
+                                    }
+                                    else if (item.Sentimento == "Negative")
+                                    {
+                                        sentimentoDisplay = "Negativo";
+                                    }
+                                    else if (item.Sentimento == "Neutral")
+                                    {
+                                        sentimentoDisplay = "Neutro";
+                                    }
+                                    else
+                                    {
+                                        sentimentoDisplay = item.Sentimento; // Se o valor não for "Positive", "Negative" ou "Neutral", exibe o valor original
+                                    }
+                                }
+                                @sentimentoDisplay
+                            </td>
+                            <td>@(item.Positivo.ToString("P0"))</td>
+                            <td>@(item.Negativo.ToString("P0"))</td>
+                            <td>@(item.Neutro.ToString("P0"))</td>
+                            <td>
+                                @Html.ActionLink("Excluir", "Delete", new { id = item.Id }) |
+                                @Html.ActionLink("Detalhes", "Details", new { id = item.Id })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
             </table>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Seletores
+            const referenteSearch = document.getElementById('referenteSearch');
+            const sentimentoFilter = document.getElementById('sentimentoFilter');
+            const resetFilters = document.getElementById('resetFilters');
+            const table = document.getElementById('comentariosTable');
+
+            // Função para verificar se algum filtro foi aplicado
+            function checkFilters() {
+                let referenteSearchValue = referenteSearch.value.trim().toLowerCase();
+                let sentimentoFilterValue = sentimentoFilter.value;
+
+                // Se houver algum filtro aplicado, ativa o botão de reset
+                if (referenteSearchValue !== "" || sentimentoFilterValue !== "") {
+                    resetFilters.disabled = false;
+                    resetFilters.style.opacity = 1; // Restaura a opacidade
+                } else {
+                    resetFilters.disabled = true;
+                    resetFilters.style.opacity = 0.5; // Deixa o botão esmaecido
+                }
+            }
+
+            // Filtro de pesquisa
+            function filterTable() {
+                let referenteSearchValue = referenteSearch.value.toLowerCase();
+                let sentimentoFilterValue = sentimentoFilter.value;
+                let rows = table.querySelectorAll('tr');
+
+                rows.forEach(row => {
+                    let referente = row.querySelector('td:nth-child(3)').textContent.trim().toLowerCase();
+                    let sentimento = row.querySelector('td:nth-child(5)').textContent.trim().toLowerCase();
+
+                    let referenteMatch = referenteSearchValue === "" || referente.includes(referenteSearchValue);
+                    let sentimentoMatch = sentimentoFilterValue === "" || sentimento === sentimentoFilterValue.toLowerCase();
+
+                    row.style.display = referenteMatch && sentimentoMatch ? '' : 'none';
+                });
+
+                checkFilters(); // Verifica se algum filtro foi aplicado após a filtragem
+            }
+
+            // Resetar filtros
+            function resetTableFilters() {
+                referenteSearch.value = '';
+                sentimentoFilter.value = '';
+                filterTable();
+            }
+
+            // Eventos
+            referenteSearch.addEventListener('input', filterTable);
+            sentimentoFilter.addEventListener('change', filterTable);
+            resetFilters.addEventListener('click', resetTableFilters);
+
+            // Verifica filtros no carregamento da página
+            checkFilters();
+        });
+    </script>
 
 </main>

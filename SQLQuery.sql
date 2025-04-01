@@ -81,7 +81,26 @@ VALUES
 ('28', 'thiagoluange@ufop.edu.br', 'Thiago Luange', 'Gomes', 'UFOP', 'DECSI', GETDATE(), 1, 0, ''),
 ('29', 'tiagolima@decsi.ufop.edu.br', 'Tiago França Melo', 'de Lima', 'UFOP', 'DECSI', GETDATE(), 1, 0, ''),
 ('30', 'vjpamorim@ufop.edu.br', 'Vicente José', 'Peixoto de Amorim', 'UFOP', 'DECSI', GETDATE(), 1, 0, ''),
-('31', 'viniciusvdias@ufop.edu.br', 'Vinícius Vitor', 'dos Santos Dias', 'UFOP', 'DECSI', GETDATE(), 1, 0, '');
+('31', 'viniciusvdias@ufop.edu.br', 'Vinícius Vitor', 'dos Santos Dias', 'UFOP', 'DECSI', GETDATE(), 1, 0, ''),
+('33', 'adam@ufop.edu.br', 'Adam James', 'Sargeant', 'ICEA', 'DECEA', GETDATE(), 1, 0, ''),
+('34', 'alana.felippe@ufop.edu.br', 'Alana Cavalcante', 'Felippe', 'ICEA', 'DECEA', GETDATE(), 1, 0, ''),
+('35', 'anliy@ufop.edu.br', 'Anliy Natsuyo Nashimoto', 'Sargeant', 'ICEA', 'DECEA', GETDATE(), 1, 0, ''),
+('36', 'carlosrpontesf@ufop.edu.br', 'Carlos Renato', 'Pontes', 'ICEA', 'DECEA', GETDATE(), 1, 0, ''),
+('37', 'cristiano.benjamin@ufop.edu.br', 'Cristiano Santos', 'Benjamin', 'ICEA', 'DECEA', GETDATE(), 1, 0, ''),
+('38', 'diego.barros@ufop.edu.br', 'Diego da Silva', 'Barros', 'ICEA', 'DECEA', GETDATE(), 1, 0, ''),
+('39', 'fbacani@ufop.edu.br', 'Felipo', 'Bacani', 'ICEA', 'DECEA', GETDATE(), 1, 0, ''),
+('40', 'fernanda.cruz@ufop.edu.br', 'Fernanda Tatia', 'Cruz', 'ICEA', 'DECEA', GETDATE(), 1, 0, ''),
+('41', 'herson@ufop.edu.br', 'Herson de Oliveira', 'Peixoto', 'ICEA', 'DECEA', GETDATE(), 1, 0, ''),
+('42', 'jennyffer.barrera@ufop.edu.br', 'Jennyffer Smith Bohorquez', 'Barrera', 'ICEA', 'DECEA', GETDATE(), 1, 0, ''),
+('43', 'juvenil@ufop.edu.br', 'Juvenil Siqueira de Oliveira', 'Filho', 'ICEA', 'DECEA', GETDATE(), 1, 0, ''),
+('44', 'vieirakarla@ufop.edu.br', 'Karla Moreira', 'Vieira', 'ICEA', 'DECEA', GETDATE(), 1, 0, ''),
+('45', 'lucilia@ufop.edu.br', 'Lucília Alves', 'Linhares', 'ICEA', 'DECEA', GETDATE(), 1, 0, ''),
+('46', 'marcosgoulart@ufop.edu.br', 'Marcos Goulart', 'Lima', 'ICEA', 'DECEA', GETDATE(), 1, 0, ''),
+('47', 'rafael.thebaldi@ufop.edu.br', 'Rafael Santos', 'Thebaldi', 'ICEA', 'DECEA', GETDATE(), 1, 0, ''),
+('48', 'ronan.ferreira@ufop.edu.br', 'Ronan Silva', 'Ferreira', 'ICEA', 'DECEA', GETDATE(), 1, 0, ''),
+('49', 'savio.correa@ufop.edu.br', 'Savio Figueira', 'Correa', 'ICEA', 'DECEA', GETDATE(), 1, 0, ''),
+('50', 'shirley@ufop.edu.br', 'Shirley da Silva', 'Macedo', 'ICEA', 'DECEA', GETDATE(), 1, 0, '');
+
 
 INSERT INTO Professores (Id, Email, FirstName, LastName, Campus, Departamento, CreatedOn, Ativo, Media, AvaliacaoGeral)  
 VALUES  

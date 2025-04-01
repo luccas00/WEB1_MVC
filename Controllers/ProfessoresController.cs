@@ -31,7 +31,12 @@ namespace LuccasCorpVX.Controllers
             ViewBag.FullName = fullName;
             ViewBag.Tipo = await _context.GetTipoAsync(userId);
 
-            return View(_context.Professores.ToList());
+            List<Professores> professores = await _context.Professores.ToListAsync();
+
+            professores = professores.Where(p => p.Ativo == true).ToList();
+            professores = professores.OrderBy(p => p.FirstName).ToList();
+
+            return View(professores);
         }
 
         protected override void Dispose(bool disposing)

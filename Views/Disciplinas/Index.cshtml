@@ -8,86 +8,204 @@
         </div>
     </div>
 
+    <!-- Filtros e Pesquisa -->
+    <div class="row">
+        <div class="col-12 d-flex gap-2 mb-3">
+            <input type="text" id="searchInput" class="form-control" placeholder="Pesquisar por nome ou código..." />
+
+            <select id="departamentoFilter" class="form-select">
+                <option value="">Todos os Departamentos</option>
+                <option value="DECEA">DECEA</option>
+                <option value="DECSI">DECSI</option>
+            </select>
+
+            <select id="avaliacaoFilter" class="form-select">
+                <option value="">Todas as Avaliações</option>
+                <option value="Positivo">Positivo</option>
+                <option value="Negativo">Negativo</option>
+                <option value="Neutro">Neutro</option>
+            </select>
+
+            <button id="resetFilters" class="btn btn-secondary">↻</button>
+        </div>
+    </div>
 
     <!-- Tabela de Disciplinas -->
     <div class="row">
         <div class="col-12 bg-light d-flex flex-column">
             <table class="table">
-                <tr>
-                    <th>
-                        Código
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Nome)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Campus)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Departamento)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Media)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.AvaliacaoGeral)
-                    </th>
-                    <th></th>
-                </tr>
-
-                @foreach (var item in Model)
-                {
+                <thead>
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CodigoUFOP)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Nome)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Campus)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Departamento)
-                        </td>
-                        <td>
-                            @*@Html.DisplayFor(modelItem => item.Media)*@
-                            @(item.Media.ToString("P0"))
-                        </td>
-                        <td>
-                            @{
-                                string sentimentoDisplay = "";
-
-                                if (item.AvaliacaoGeral == "Positive")
-                                {
-                                    sentimentoDisplay = "Positivo";
-                                }
-                                else if (item.AvaliacaoGeral == "Negative")
-                                {
-                                    sentimentoDisplay = "Negativo";
-                                }
-                                else if (item.AvaliacaoGeral == "Neutral")
-                                {
-                                    sentimentoDisplay = "Neutro";
-                                }
-                                else
-                                {
-                                    sentimentoDisplay = item.AvaliacaoGeral; // Se o valor não for "Positive", "Negative" ou "Neutral", exibe o valor original
-                                }
-                            }
-                            @sentimentoDisplay
-                        </td>
-                        @*<td>
-                            @Html.DisplayFor(modelItem => item.AvaliacaoGeral)
-                        </td>*@
-                        <td>
-                            @Html.ActionLink("Novo Comentario", "Create", "Comentarios", new { id = item.Codigo, tipo = "Disciplina" }, null)
-                        </td>
+                        <th id="sortCodigo" style="cursor: pointer;">Código ⬍</th>
+                        <th id="sortNome" style="cursor: pointer;">@Html.DisplayNameFor(model => model.Nome) ⬍</th>
+                        <th>@Html.DisplayNameFor(model => model.Campus)</th>
+                        <th>@Html.DisplayNameFor(model => model.Departamento)</th>
+                        <th id="sortMedia" style="cursor: pointer;">@Html.DisplayNameFor(model => model.Media) ⬍</th>
+                        <th>@Html.DisplayNameFor(model => model.AvaliacaoGeral)</th>
+                        <th></th>
                     </tr>
-                }
+                </thead>
+                <tbody id="disciplinasTable">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.CodigoUFOP)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Campus)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Departamento)</td>
+                            <td>@(item.Media.ToString("P0"))</td>
+                            <td>
+                                @{
+                                    string sentimentoDisplay = "";
 
+                                    if (item.AvaliacaoGeral == "Positive")
+                                    {
+                                        sentimentoDisplay = "Positivo";
+                                    }
+                                    else if (item.AvaliacaoGeral == "Negative")
+                                    {
+                                        sentimentoDisplay = "Negativo";
+                                    }
+                                    else if (item.AvaliacaoGeral == "Neutral")
+                                    {
+                                        sentimentoDisplay = "Neutro";
+                                    }
+                                    else
+                                    {
+                                        sentimentoDisplay = item.AvaliacaoGeral; // Se o valor não for "Positive", "Negative" ou "Neutral", exibe o valor original
+                                    }
+                                }
+                                @sentimentoDisplay
+                            </td>
+                            <td>
+                                @Html.ActionLink("Novo Comentario", "Create", "Comentarios", new { id = item.Codigo, tipo = "Disciplina" }, null)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
             </table>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Seletores
+            const searchInput = document.getElementById('searchInput');
+            const departamentoFilter = document.getElementById('departamentoFilter');
+            const avaliacaoFilter = document.getElementById('avaliacaoFilter');
+            const resetFilters = document.getElementById('resetFilters');
+            const table = document.getElementById('disciplinasTable');
+            const sortCodigo = document.getElementById('sortCodigo');
+            const sortNome = document.getElementById('sortNome');
+            const sortMedia = document.getElementById('sortMedia');
+
+            let codigoAscending = true;
+            let nomeAscending = true;
+            let mediaAscending = true;
+
+            // Filtro de pesquisa e seleção
+            function filterTable() {
+                let nameFilter = searchInput.value.toLowerCase();
+                let departamentoFilterValue = departamentoFilter.value;
+                let avaliacaoFilterValue = avaliacaoFilter.value;
+                let rows = table.querySelectorAll('tr');
+
+                rows.forEach(row => {
+                    let codigo = row.querySelector('td:first-child').textContent.toLowerCase();
+                    let name = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+                    let departamento = row.querySelector('td:nth-child(4)').textContent.trim();
+                    let avaliacao = row.querySelector('td:nth-child(6)').textContent.trim();
+
+                    let nameMatch = name.includes(nameFilter) || codigo.includes(nameFilter);
+                    let departamentoMatch = departamentoFilterValue === "" || departamento === departamentoFilterValue;
+                    let avaliacaoMatch = avaliacaoFilterValue === "" || avaliacao === avaliacaoFilterValue;
+
+                    row.style.display = nameMatch && departamentoMatch && avaliacaoMatch ? '' : 'none';
+                });
+
+                updateResetButtonState();
+            }
+
+            // Resetar filtros
+            function resetTableFilters() {
+                searchInput.value = '';
+                departamentoFilter.value = '';
+                avaliacaoFilter.value = '';
+                filterTable();
+            }
+
+            // Atualizar estado do botão de reset
+            function updateResetButtonState() {
+                const hasFilters = searchInput.value || departamentoFilter.value || avaliacaoFilter.value;
+
+                if (hasFilters) {
+                    resetFilters.disabled = false;
+                    resetFilters.style.opacity = '1';
+                    resetFilters.style.cursor = 'pointer';
+                } else {
+                    resetFilters.disabled = true;
+                    resetFilters.style.opacity = '0.5';
+                    resetFilters.style.cursor = 'not-allowed';
+                }
+            }
+
+            // Ordenação por Código
+            function sortByCodigo() {
+                let rows = Array.from(table.rows);
+
+                rows.sort((a, b) => {
+                    let codigoA = a.cells[0].textContent.trim();
+                    let codigoB = b.cells[0].textContent.trim();
+
+                    return codigoAscending ? codigoA.localeCompare(codigoB) : codigoB.localeCompare(codigoA);
+                });
+
+                codigoAscending = !codigoAscending;
+                rows.forEach(row => table.appendChild(row));
+            }
+
+            // Ordenação por Nome
+            function sortByName() {
+                let rows = Array.from(table.rows);
+
+                rows.sort((a, b) => {
+                    let nomeA = a.cells[1].textContent.trim().toLowerCase();
+                    let nomeB = b.cells[1].textContent.trim().toLowerCase();
+
+                    return nomeAscending ? nomeA.localeCompare(nomeB) : nomeB.localeCompare(nomeA);
+                });
+
+                nomeAscending = !nomeAscending;
+                rows.forEach(row => table.appendChild(row));
+            }
+
+            // Ordenação por Média
+            function sortByMedia() {
+                let rows = Array.from(table.rows);
+
+                rows.sort((a, b) => {
+                    let mediaA = parseFloat(a.cells[4].textContent.replace('%', '').replace(',', '.')) || 0;
+                    let mediaB = parseFloat(b.cells[4].textContent.replace('%', '').replace(',', '.')) || 0;
+
+                    return mediaAscending ? mediaA - mediaB : mediaB - mediaA;
+                });
+
+                mediaAscending = !mediaAscending;
+                rows.forEach(row => table.appendChild(row));
+            }
+
+            // Eventos
+            searchInput.addEventListener('input', filterTable);
+            departamentoFilter.addEventListener('change', filterTable);
+            avaliacaoFilter.addEventListener('change', filterTable);
+            resetFilters.addEventListener('click', resetTableFilters);
+            sortCodigo.addEventListener('click', sortByCodigo);
+            sortNome.addEventListener('click', sortByName);
+            sortMedia.addEventListener('click', sortByMedia);
+
+            // Inicializa o estado do botão
+            updateResetButtonState();
+        });
+    </script>
 
 </main>
