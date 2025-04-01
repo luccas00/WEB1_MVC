@@ -348,6 +348,7 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Images\ErroBDOffline.png" />
     <Content Include="Images\LuccasCorpLogo.png" />
     <Content Include="Images\LuccasCorpLogo0.png" />
     <Content Include="Images\LuccasCorpLogo00.png" />
