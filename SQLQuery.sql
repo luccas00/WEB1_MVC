@@ -1,6 +1,3 @@
-select * from Disciplinas
-
-delete from Disciplinas
 
 INSERT INTO Disciplinas (CodigoUFOP, Nome, Campus, Departamento, Ativo, Media, AvaliacaoGeral)
 VALUES 
@@ -42,12 +39,6 @@ VALUES
 ('CSI303', 'SEGURANCA E AUDITORIA DE SISTEMAS', 'ICEA', 'DECSI', 1, 0, ''),
 ('CSI605', 'SISTEMAS DE APOIO A DECISAO', 'ICEA', 'DECSI', 1, 0, ''),
 ('CSI999', 'TRABALHO DE CONCLUSAO DE CURSO II', 'ICEA', 'DECSI', 1, 0, '');
-
-SELECT * from ContactMessages
-
-select * from Professores
-
-delete from Professores
 
 INSERT INTO Professores (Id, Email, FirstName, LastName, Campus, Departamento, CreatedOn, Ativo, Media, AvaliacaoGeral)  
 VALUES  
@@ -110,6 +101,10 @@ INSERT INTO Professores (Id, Email, FirstName, LastName, Campus, Departamento, C
 VALUES  
 ('32', 'freddy.vicente@ufop.edu.br', 'Frddy Pablo', 'Castro Vicente', 'UFOP', 'DECEA', GETDATE(), 1, 0, '')
 
+update Professores
+set FirstName = 'Freddy'
+where id = 32
+
 select * from AspNetUsers
 
 update AspNetUsers
@@ -130,24 +125,18 @@ set Media = 0,
 AvaliacaoGeral = '',
 TotalComentarios = 0
 
-
 update Disciplinas
 set Media = 0,
 AvaliacaoGeral = '',
 TotalComentarios = 0
 
-delete from Comentarios
-
-select * from Professores
-
-select * from Disciplinas
-
-select * from Comentarios
-
 update Professores
 set Id = 999
 where Id = 0
 
-select * from AspNetUsers
+update Professores
+set Campus = 'ICEA'
 
-select * from ContactMessages
+update Professores
+set Ativo = 0
+where Id = 999
