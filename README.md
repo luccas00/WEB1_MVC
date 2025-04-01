@@ -24,7 +24,7 @@
   - Moderação automatizada para evitar discursos ofensivos ou discriminatórios.
 
      - Funcionalidades Implementadas
-	- Todo o Escopo foi implementado com sucesso.
+		- Todo o Escopo foi implementado com sucesso.
    
 
 <!-- Apresentar restrições de funcionalidades e de escopo. -->
@@ -45,8 +45,16 @@
   - [Site Final - MVC](https://luccascorpvx.azurewebsites.net/)
   - [Protótipo Static Web App](https://brave-stone-0c5a98610.4.azurestaticapps.net/)
 
+
+### 5. Tratamento de Erros
+
+Possível Erro: Banco de Dados Offline
+
+O site utiliza um banco de dados gratuito no Azure, o que significa que há uma configuração nativa que pausa automaticamente o banco de dados caso não haja acessos por um longo período. Se você visualizar a mensagem abaixo ao tentar acessar o site, aguarde de 30 a 60 segundos e atualize a página para tentar novamente. O banco de dados será iniciado automaticamente.
+
+﻿![Diagrama de Classe DB Diagram](Images/ErroBDOffline.png)
  
-### 5. Código Fonte
+### 6. Código Fonte
 
   Código fonte dos protótipos desenvolvidos no modelo MVC e em um aplicativo web estático.
 
@@ -54,7 +62,7 @@
   - [Protótipo Static Web App](https://github.com/luccas00/WEB1_StaticWebApp)
 	
 
-### 6. Referências
+### 7. Referências
 
   - [Introdução ao ASP.NET MVC](https://learn.microsoft.com/pt-br/aspnet/mvc/overview/getting-started/introduction/getting-started)
   - [Confirmação da conta e recuperação de senha com ASP.NET Identity (C#)](https://learn.microsoft.com/pt-br/aspnet/identity/overview/features-api/account-confirmation-and-password-recovery-with-aspnet-identity)
@@ -65,15 +73,9 @@
   - [HTML Tutorial](https://www.w3schools.com/html/default.asp)
   - [CSS Tutorial](https://www.w3schools.com/css/default.asp)
 
-### 7. Diagrama de Classe
+### 8. Diagrama de Classe
 
 ﻿![Diagrama de Classe DB Diagram](Images/WebI_MVC_LuccasCorpVX.svg)
 
-### 8. Tratamento de Erros
 
-Possível Erro: Banco de Dados Offline
-
-O site utiliza um banco de dados gratuito no Azure, o que significa que há uma configuração nativa que pausa automaticamente o banco de dados caso não haja acessos por um longo período. Se você visualizar a mensagem abaixo ao tentar acessar o site, aguarde de 30 a 60 segundos e atualize a página para tentar novamente. O banco de dados será iniciado automaticamente.
-
-﻿![Diagrama de Classe DB Diagram](Images/ErroBDOffline.png)
 
