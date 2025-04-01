@@ -38,7 +38,7 @@
 
   Links de acesso
 
-  - [Protótipo MVC](https://luccascorpvx.azurewebsites.net/)
+  - [Site Final - MVC](https://luccascorpvx.azurewebsites.net/)
   - [Protótipo Static Web App](https://brave-stone-0c5a98610.4.azurestaticapps.net/)
 
  
@@ -46,7 +46,7 @@
 
   Código fonte dos protótipos desenvolvidos no modelo MVC e em um aplicativo web estático.
 
-  - [Protótipo MVC](https://github.com/luccas00/WEB1_MVC)
+  - [MVC](https://github.com/luccas00/WEB1_MVC)
   - [Protótipo Static Web App](https://github.com/luccas00/WEB1_StaticWebApp)
 	
 
@@ -64,3 +64,11 @@
 ### 7. Diagrama de Classe
 
 ﻿![Diagrama de Classe DB Diagram](Images/WebI_MVC_LuccasCorpVX.svg)
+
+### 8. Tratamento de Erros
+
+Possível Erro: Banco de Dados Offline
+O site utiliza um banco de dados gratuito no Azure, o que significa que há uma configuração nativa que pausa automaticamente o banco de dados caso não haja acessos por um longo período. Se você visualizar a mensagem abaixo ao tentar acessar o site, aguarde de 30 a 60 segundos e atualize a página para tentar novamente. O banco de dados será iniciado automaticamente.
+
+﻿![Diagrama de Classe DB Diagram](Images/ErroBDOffline.png)
+
