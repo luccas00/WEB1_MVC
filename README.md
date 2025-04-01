@@ -23,6 +23,10 @@
   - Exibição de comentários aprovados de forma organizada e acessível.
   - Moderação automatizada para evitar discursos ofensivos ou discriminatórios.
 
+     - Funcionalidades Implementadas
+	- Todo o Escopo foi implementado com sucesso.
+   
+
 <!-- Apresentar restrições de funcionalidades e de escopo. -->
 ### 3. Restrições
 
@@ -42,11 +46,11 @@
   - [Protótipo Static Web App](https://brave-stone-0c5a98610.4.azurestaticapps.net/)
 
  
-### 5. Protótipo
+### 5. Código Fonte
 
   Código fonte dos protótipos desenvolvidos no modelo MVC e em um aplicativo web estático.
 
-  - [MVC](https://github.com/luccas00/WEB1_MVC)
+  - [Site Final MVC](https://github.com/luccas00/WEB1_MVC)
   - [Protótipo Static Web App](https://github.com/luccas00/WEB1_StaticWebApp)
 	
 
