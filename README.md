@@ -44,6 +44,10 @@
 
   - [Site Final - MVC](https://luccascorpvx.azurewebsites.net/)
   - [Protótipo Static Web App](https://brave-stone-0c5a98610.4.azurestaticapps.net/)
+  
+  Apresentação YouTube
+
+  - [Apresentação](https://www.youtube.com/watch?v=1mgI4znS15g)
 
 
 ### 5. Tratamento de Erros
